@@ -1,0 +1,80 @@
+.navigation{
+  display: flex;
+  align-items: center;
+
+}
+
+.header__link {
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #000;
+}
+
+.header__link:hover {
+  opacity: 0.6;
+}
+
+.header__link_is_logged-in{
+  margin-left: 20px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.header__link_is_active{
+ font-weight: 500;
+}
+
+.header__button {
+  border: none;
+  box-sizing: border-box;
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 30px;
+}
+
+.header__button-text {
+  color: #fff;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.header__account-link{
+  text-decoration: none;
+  border: 2px solid #aaa;
+  box-sizing: border-box;
+  width: 100px;
+  height: 32px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-left: 50px;
+}
+
+.header__account-logo{
+  height: 14px;
+  width: 12px;
+  background-image: url("../../images/account_logo.svg");
+}
+
+.header__account-text{
+  text-decoration: none;
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+}
