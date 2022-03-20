@@ -3,8 +3,8 @@
 
 body {
   background-color: #fff;
-  padding: 0 40px;
-  max-width: 1200px;
+  /*padding: 0 40px;*/
+  max-width: 1280px;
   margin: 0 auto;
   font-family: Inter, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -17,26 +17,26 @@ body {
   font-weight: normal;
 }
 
-@media screen and (max-width: 1279px) {
-  body {
-    padding: 0 3.12vw;
-  }
-}
+/*@media screen and (max-width: 1279px) {*/
+/*  body {*/
+/*    padding: 0 3.12vw;*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 1023px) {
-  body {
-    padding: 0 2.605vw;
-  }
-}
+/*@media screen and (max-width: 1023px) {*/
+/*  body {*/
+/*    padding: 0 2.605vw;*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 767px) {
-  body {
-    padding: 0 20px;
-  }
-}
+/*@media screen and (max-width: 767px) {*/
+/*  body {*/
+/*    padding: 0 20px;*/
+/*  }*/
+/*}*/
 
-@media screen and (max-width: 457px) {
-  body {
-    padding: 0 4.375vw;
-  }
-}
+/*@media screen and (max-width: 457px) {*/
+/*  body {*/
+/*    padding: 0 4.375vw;*/
+/*  }*/
+/*}*/

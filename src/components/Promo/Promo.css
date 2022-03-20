@@ -1,12 +1,13 @@
 .promo {
-  margin-top: 20px;
-  width: 100%;
+  margin: 20px auto 0;
+  max-width: 1200px;
   min-height: 493px;
   background-color: #f5f5f5;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .promo__header{
