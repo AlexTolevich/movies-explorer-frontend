@@ -1,5 +1,5 @@
 .portfolio {
-  padding: 0 70px 125px;
+  padding: 0 70px 115px;
   box-sizing: border-box;
 }
 
@@ -25,6 +25,7 @@
 
 .portfolio__link-item:last-of-type {
   border-bottom: none;
+  padding: 20px 0 0px;
 }
 
 .portfolio__link {
