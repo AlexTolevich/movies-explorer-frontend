@@ -3,8 +3,9 @@ import React        from 'react';
 import Header       from '../Header/Header.js';
 import Promo        from '../Promo/Promo.js';
 import AboutProject from '../AboutProject/AboutProject.js';
-import Techs   from '../Techs/Techs.js';
-import AboutMe from '../AboutMe/AboutMe.js';
+import Techs        from '../Techs/Techs.js';
+import AboutMe      from '../AboutMe/AboutMe.js';
+import Portfolio    from '../Portfolio/Portfolio.js';
 
 function Main({loggedIn}) {
   return (
@@ -14,6 +15,7 @@ function Main({loggedIn}) {
       <AboutProject/>
       <Techs/>
       <AboutMe/>
+      <Portfolio/>
     </>
   )
 }
