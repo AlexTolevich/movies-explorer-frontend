@@ -1,5 +1,5 @@
 import './SearchForm.css'
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
 function SearchForm() {
   return (
@@ -9,7 +9,7 @@ function SearchForm() {
         <button className="search-form__button" type="submit" name="submit-search"/>
       </div>
       <div className="search-form__filter">
-        <ToggleSwitch/>
+        <FilterCheckbox/>
         <p className="search-form__filter-label">Короткометражки</p>
       </div>
     </form>
