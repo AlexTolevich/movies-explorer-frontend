@@ -1,11 +1,11 @@
-.toggle-switch {
+.filter-checkbox {
   position: relative;
   display: inline-block;
   width: 36px;
   height: 20px;
 }
 
-.toggle-switch input {
+.filter-checkbox input {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -14,7 +14,7 @@
   opacity: 0;
 }
 
-.toggle-switch__slider {
+.filter-checkbox__slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -27,7 +27,7 @@
   transition: .4s;
 }
 
-.toggle-switch__slider:before {
+.filter-checkbox__slider:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -42,15 +42,15 @@
   box-sizing: border-box;
 }
 
-input:checked + .toggle-switch__slider {
+input:checked + .filter-checkbox__slider {
   background-color: #ebebeb;
 }
 
-input:focus + .toggle-switch__slider {
+input:focus + .filter-checkbox__slider {
   box-shadow: 0 0 2px #2BE080;
 }
 
-input:checked + .toggle-switch__slider:before {
+input:checked + .filter-checkbox__slider:before {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
