@@ -36,6 +36,9 @@
   font-size: 13px;
   line-height: 16px;
   max-width: 220px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movies-card__duration {
