@@ -1,0 +1,34 @@
+.not-found {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  min-height: 700px;
+  padding: 246px 0 60px;
+  box-sizing: border-box;
+}
+
+.not-found__header {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 1.21;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.not-found__text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.1875;
+  text-align: center;
+  margin: 5px auto 184px;
+}
+
+.not-found__link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+}

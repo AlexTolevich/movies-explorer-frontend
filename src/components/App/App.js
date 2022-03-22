@@ -8,6 +8,7 @@ import SavedMovies                            from '../SavedMovies/SavedMovies.j
 import Profile                                from '../Profile/Profile.js';
 import {movies}                               from '../../utils/demo_movies.js';
 import {savedMovies}                          from '../../utils/saved_movies.js'
+import NotFound                               from '../NotFound/NotFound.js';
 
 function App() {
   // const [loggedIn, setLoggedIn] = React.useState(true);
@@ -21,27 +22,25 @@ function App() {
                    loggedIn={true}
                    userName={'Виталий'}
                  />
-               }
-        />
+               }/>
 
         <Route path="/movies"
                element={
                  <Movies loggedIn={true} movies={movies}/>
-               }
-        />
+               }/>
         <Route path="/saved-movies"
                element={
                  <SavedMovies loggedIn={true} movies={savedMovies}/>
-               }
-        />
+               }/>
 
         <Route path="/"
                element={
                  <Main loggedIn={false}/>
-               }
-        />
+               }/>
 
-        <Route path="*" element={<Navigate to="/"/>}/>
+        <Route path="*" element={
+          <NotFound/>
+        }/>
 
       </Routes>
     </div>
