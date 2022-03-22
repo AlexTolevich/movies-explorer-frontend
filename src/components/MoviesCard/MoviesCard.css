@@ -81,6 +81,10 @@
   border: 2px solid #FFFFFF;
 }
 
+.movies-card__like-btn:hover {
+  opacity: 0.6;
+}
+
 input:focus + .movies-card__like-btn {
   box-shadow: 0 0 2px #2BE080;
 }
@@ -108,4 +112,9 @@ input:checked + .movies-card__like-btn {
   background-position: center center;
   background-size:contain;
   border: none;
+  transition: 0.3s;
+}
+
+.movies-card__del-btn:hover {
+  opacity: 0.6;
 }

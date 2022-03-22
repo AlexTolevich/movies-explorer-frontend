@@ -47,4 +47,10 @@ padding: 79px 70px 0;
   font-size: 13px;
   line-height: 1.23;
   vertical-align: top;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer__link:hover {
+  opacity: 0.6;
 }

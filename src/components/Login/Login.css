@@ -13,6 +13,12 @@
   display: block;
   width: 38px;
   height: 38px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login__logo:hover {
+  opacity: 0.6;
 }
 
 .login__title {
@@ -81,8 +87,15 @@
   font-size: 14px;
   line-height: 1.21;
   text-align: center;
+  border: none;
   border-radius: 3px;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login__button:hover {
+  opacity: 0.6;
 }
 
 .login__text {
@@ -94,10 +107,6 @@
   color: #A0A0A0;
 }
 
-.login__link_in_header{
-  margin: 0;
-}
-
 .login__link{
   text-decoration: none;
   font-weight: 400;
@@ -105,4 +114,10 @@
   line-height: 1.21;
   text-align: center;
   color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login__link:hover {
+  opacity: 0.6;
 }

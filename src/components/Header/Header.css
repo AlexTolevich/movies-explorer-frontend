@@ -7,3 +7,13 @@
   /*border: aqua solid 1px;*/
 }
 
+.header__logo {
+  display: block;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
+}
+
