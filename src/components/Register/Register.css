@@ -1,0 +1,104 @@
+.register {
+  width: 396px;
+  min-height: 700px;
+  margin: 0 auto;
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+}
+
+.register__logo {
+  display: block;
+  width: 38px;
+  height: 38px;
+}
+
+.register__title {
+  margin: 40px 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.21;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.register__label {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #A0A0A0;
+}
+
+.register__input {
+  padding: 15px;
+  margin: 10px 0 8px;
+  width: 100%;
+  height: 46px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: #000;
+  background-color: #F9F9F9;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
+  box-sizing: border-box;
+}
+
+.register__input::placeholder {
+  color: #000;
+  background-color: #F9F9F9;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
+}
+
+.register__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.2;
+  min-height: 12px;
+  color: #FF4062;
+  visibility: hidden;
+}
+
+.register__error_visible {
+  visibility: visible;
+}
+
+.register__button {
+  margin: 70px auto 18px;
+  width: 100%;
+  height: 45px;
+  background-color: #000;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.register__text {
+  margin: 0 auto;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  color: #A0A0A0;
+}
+
+.register__link {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  color: #000;
+}
