@@ -5,12 +5,12 @@ import SearchForm     from '../SearchForm/SearchForm.js';
 import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
 import Preloader      from '../Preloader/Preloader.js';
 
-function Movies({loggedIn}) {
+function Movies({loggedIn, movies}) {
   return (
     <>
       <Header loggedIn={loggedIn}/>
       <SearchForm/>
-      <MoviesCardList/>
+      <MoviesCardList movies={movies}/>
       {/*<Preloader/>*/}
       <Footer/>
     </>
