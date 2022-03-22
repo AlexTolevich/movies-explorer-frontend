@@ -7,7 +7,7 @@ import React          from 'react';
 
 function SavedMovies({loggedIn, movies}) {
   return (
-    <div className="saved-movies">
+    <div>
       <Header loggedIn={loggedIn}/>
       <SearchForm/>
       <MoviesCardList movies={movies}/>

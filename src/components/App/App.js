@@ -5,6 +5,7 @@ import './App.css';
 import Main                                   from '../Main/Main.js';
 import Movies                                 from '../Movies/Movies.js';
 import SavedMovies                            from '../SavedMovies/SavedMovies.js';
+import Profile                                from '../Profile/Profile.js';
 import {movies}                               from '../../utils/demo_movies.js';
 import {savedMovies}                          from '../../utils/saved_movies.js'
 
@@ -13,6 +14,15 @@ function App() {
   return (
     <div className="app">
       <Routes>
+
+        <Route path="/profile"
+               element={
+                 <Profile
+                   loggedIn={true}
+                   userName={'Виталий'}
+                 />
+               }
+        />
 
         <Route path="/movies"
                element={
