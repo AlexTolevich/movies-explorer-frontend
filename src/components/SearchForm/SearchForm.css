@@ -39,6 +39,12 @@
   background-image: url("../../images/magnifier.svg");
   background-repeat: no-repeat;
   background-position: center center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-form__button:hover {
+  opacity: 0.6;
 }
 
 .search-form__filter {

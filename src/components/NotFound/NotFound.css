@@ -31,4 +31,10 @@
   text-align: center;
   text-decoration: none;
   color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.not-found__link:hover {
+  opacity: 0.6;
 }

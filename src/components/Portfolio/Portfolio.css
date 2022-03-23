@@ -39,6 +39,12 @@
   letter-spacing: -0.04em;
   color: #000;
   text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.portfolio__link:hover {
+  opacity: 0.6;
 }
 
 .portfolio__text-link{
