@@ -1,6 +1,5 @@
 .promo {
-  margin: 20px auto 0;
-  max-width: 1200px;
+  margin: 20px 40px 0;
   min-height: 493px;
   background-color: #f5f5f5;
   border-radius: 10px;
@@ -21,4 +20,18 @@
   min-height: 116px;
   margin: 160px auto 0;
   word-wrap: break-word;
+}
+
+@media screen and (max-width: 1023px) {
+  .promo {
+    margin: 20px 20px 0;
+    min-height: 834px;
+  }
+
+  .promo__header {
+    max-width: 680px;
+    margin: 350px auto 0;
+    font-size: 40px;
+    line-height: 1.3;
+  }
 }

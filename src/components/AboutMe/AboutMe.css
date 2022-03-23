@@ -46,7 +46,7 @@
   line-height: 1.11;
 }
 
-.about-me_about {
+.about-me__about {
   margin: 0;
   font-weight: 400;
   font-size: 14px;
@@ -83,4 +83,37 @@
   width: 270px;
   height: 327px;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 1023px) {
+  .about-me {
+    min-height: 569px;
+    padding: 90px 50px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 1;
+  }
+
+  .about-me__profession {
+    padding: 16px 0 20px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-me__about {
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 364px;
+  }
+
+  .about-me__social-list {
+    margin: 86px 0 0;
+  }
+
+  .about-me__avatar {
+    width: 255px;
+    height: 307px;
+  }
 }

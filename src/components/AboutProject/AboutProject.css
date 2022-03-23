@@ -43,7 +43,7 @@
 
 .about-project__periods{
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 3.77fr;
   grid-template-rows: 36px 1fr;
   font-weight: 400;
   font-size: 14px;
@@ -67,4 +67,21 @@
 .about-project__periods-description{
   color: #a0a0a0;
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .about-project {
+    min-height: 585px;
+    padding: 91px 50px;
+  }
+
+  .about-project__table {
+    gap: 22px 30px;
+    padding-bottom: 93px;
+  }
+
+  .about-project__table-text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
 }
