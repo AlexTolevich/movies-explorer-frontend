@@ -1,7 +1,6 @@
 import React                                  from 'react';
 import {Route, Routes, Navigate, useNavigate} from 'react-router-dom';
 import './App.css';
-// import Header from '../Header/Header.js';
 import Main                                   from '../Main/Main.js';
 import Movies                                 from '../Movies/Movies.js';
 import SavedMovies                            from '../SavedMovies/SavedMovies.js';

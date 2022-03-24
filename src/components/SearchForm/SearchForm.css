@@ -2,7 +2,6 @@
   padding: 60px 70px 10px;
   display: flex;
   flex-direction: column;
-
 }
 
 .search-form__container {
@@ -27,6 +26,11 @@
   font-size: 13px;
   line-height: 1.31;
   color: #A0A0A0;
+  margin-right: 5px;
+}
+
+.search-form__input:focus {
+  border: solid 1px #000;
 }
 
 .search-form__button {
@@ -77,7 +81,7 @@
   }
 
   .search-form__input {
-    width: 70%;
+    width: 69%;
   }
 
   .search-form__filter-label {
