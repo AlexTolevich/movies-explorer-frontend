@@ -30,3 +30,22 @@
 .nav-tab__link:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 767px) {
+  .nav-tab {
+    gap: 6px;
+    margin-bottom: 17px;
+  }
+
+  .nav-tab__link-item {
+    width: 82px;
+    height: 26px;
+    border-radius: 6px;
+    background-color: #e8e8e8;
+  }
+
+  .nav-tab__link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}

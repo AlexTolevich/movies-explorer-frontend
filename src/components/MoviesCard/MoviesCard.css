@@ -118,3 +118,15 @@ input:checked + .movies-card__like-btn {
 .movies-card__del-btn:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 1023px) {
+  .movies-card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movies-card__image {
+    height: 168px;
+  }
+}
