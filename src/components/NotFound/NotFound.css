@@ -38,3 +38,31 @@
 .not-found__link:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 1023px) {
+  .not-found {
+    padding: 408px 0 222px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .not-found {
+    padding: 329px 0 30px;
+  }
+
+  .not-found__header {
+    font-size: 80px;
+    line-height: 1.21;
+  }
+
+  .not-found__text {
+    font-size: 12px;
+    line-height: 1.25;
+    margin: 10px auto 284px;
+  }
+
+  .not-found__link {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
