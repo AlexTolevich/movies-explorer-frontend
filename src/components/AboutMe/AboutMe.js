@@ -3,7 +3,7 @@ import avatar from '../../images/ava_vitaliy.png'
 
 function AboutMe() {
   return (
-    <div className="about-me">
+    <div className="about-me" id={"about-me"}>
       <h2 className="about-me__header">Студент</h2>
       <div className="about-me__header-line"/>
       <div className="about-me__container">
@@ -17,10 +17,16 @@ function AboutMe() {
           </p>
           <ul className="about-me__social-list">
             <li className="about-me__social-item">
-              <a className="about-me__social-link" href="https://github.com/AlexTolevich">Facebook</a>
+              <a className="about-me__social-link"
+                 target="_blank"
+                 rel="noreferrer"
+                 href="https://github.com/AlexTolevich">Facebook</a>
             </li>
             <li className="about-me__social-item">
-              <a className="about-me__social-link" href="https://github.com/AlexTolevich">Github</a>
+              <a className="about-me__social-link"
+                 target="_blank"
+                 rel="noreferrer"
+                 href="https://github.com/AlexTolevich">Github</a>
             </li>
           </ul>
         </div>
