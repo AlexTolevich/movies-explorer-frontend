@@ -23,6 +23,8 @@
   padding: 70px 0 110px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "h1 h2"
+  "p1 p2";
   gap: 26px 40px;
 }
 
@@ -107,7 +109,6 @@
 
 @media screen and (max-width: 767px) {
   .about-project {
-    min-height: 641px;
     padding: 70px 18px;
   }
 
