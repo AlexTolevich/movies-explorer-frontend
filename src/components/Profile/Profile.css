@@ -1,0 +1,139 @@
+.profile {
+  min-height: 626px;
+  padding: 74px 70px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.profile__header {
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.21;
+  padding-bottom: 124px;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  width: 410px;
+  justify-content: center;
+}
+
+.profile__input-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 16px;
+  border-bottom: solid 1px #e8e8e8;
+}
+
+.profile__input-container:last-of-type {
+  padding: 18px 0 0;
+  border-bottom: none;
+}
+
+.profile__label {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.18;
+}
+
+.profile__input {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.18;
+  text-align: right;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 0 0 0 4px;
+}
+
+.profile__input::placeholder{
+  color: #000;
+  background-color: #fff;
+}
+
+.profile__error {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.18;
+  text-align: right;
+  color: #ff4062;
+}
+
+.profile__edit-btn {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.23;
+  background: none;
+  border: none;
+  margin: 220px 0 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile__edit-btn:hover {
+  opacity: 0.6;
+}
+
+.profile__signout {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.23;
+  color: #ff4062;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.profile__signout:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile {
+    min-height: 950px;
+    padding: 236px 179px 269px;
+  }
+
+  .profile__header {
+    padding-bottom: 96px;
+  }
+
+  .profile__edit-btn {
+    margin: 210px 0 14px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile {
+    min-height: 706px;
+    padding: 70px 30px 40px;
+  }
+
+  .profile__header {
+    padding-bottom: 80px;
+    font-size: 24px;
+    line-height: 1.21;
+  }
+
+  .profile__edit-btn {
+    margin: 379px 0 14px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .profile__form {
+    width: 260px;
+  }
+
+  .profile__signout {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}

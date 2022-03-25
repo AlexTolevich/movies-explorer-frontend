@@ -1,0 +1,31 @@
+.header {
+  padding: 0 70px;
+  min-height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /*border: aqua solid 1px;*/
+}
+
+.header__logo {
+  display: block;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 0 14px;
+  }
+}
+
