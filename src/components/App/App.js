@@ -1,4 +1,4 @@
-import React                                  from 'react';
+import React, {useEffect}                     from 'react';
 import {Route, Routes, Navigate, useNavigate} from 'react-router-dom';
 import './App.css';
 import Main                                   from '../Main/Main.js';
@@ -10,12 +10,23 @@ import {savedMovies}                          from '../../utils/saved_movies.js'
 import NotFound                               from '../NotFound/NotFound.js';
 import Register                               from '../Register/Register.js';
 import Login                                  from '../Login/Login.js';
+import {moviesApi}                            from '../../utils/MoviesApi.js';
+import {mainApi}                              from '../../utils/MainApi.js';
 
 function App() {
   // const [loggedIn, setLoggedIn] = React.useState(true);
+
+  useEffect(() => {
+    moviesApi.getMovies().then(
+      res => {
+        console.log(res);
+      }
+    ).catch(err => console.log(err));
+  }, []);
+
   return (
     <div className="app">
-      <Routes>
+      <Routes>n
 
         <Route path="/profile"
                element={
