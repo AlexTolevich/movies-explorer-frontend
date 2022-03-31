@@ -8,7 +8,7 @@ function MoviesCard({movie}) {
   return (
     <article className="movies-card">
       <img className="movies-card__image"
-           src={`https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`}
+           src={`https://api.nomoreparties.co${movie.image.url}`}
            alt={movie.nameRU}/>
       <div className="movies-card__title-container">
         <div className="movies-card__text">

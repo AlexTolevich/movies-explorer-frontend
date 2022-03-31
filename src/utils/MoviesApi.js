@@ -2,6 +2,7 @@ class MoviesApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
+    this.getMovies = this.getMovies.bind(this);
   }
 
   _checkResponse(res) {
