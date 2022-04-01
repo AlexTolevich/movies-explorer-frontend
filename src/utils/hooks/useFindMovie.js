@@ -55,7 +55,7 @@ export function useFindMovie(movies, isSaved) {
 
   function onSubmitSearch(event) {
     event.preventDefault();
-    filterMovies(movies, inputSearch);
+    filterMovies(movies, inputSearch, short);
   }
 
   return {
