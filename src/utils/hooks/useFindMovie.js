@@ -34,6 +34,10 @@ export function useFindMovie(movies, isSaved, initialStateRender) {
     updateShort(JSON.parse(localStorage.getItem(`${isSaved}Short`) || 'false'));
   }, []);
 
+  useEffect(() => {
+    updateFilteredMovies(movies)
+  }, [movies]);
+
   function handleChange(event) {
     const query = event.target.value.toLowerCase();
     updateInputSearch(query);

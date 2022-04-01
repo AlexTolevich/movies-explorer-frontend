@@ -23,14 +23,14 @@ class MainApi {
       headers: this._headers,
       body: JSON.stringify({
         country: data.country,
-        director: data.direction,
+        director: data.director,
         duration: data.duration,
         year: data.year,
         description: data.description,
-        image: data.image,
+        image: `https://api.nomoreparties.co${data.image.url}`,
         trailerLink: data.trailerLink,
-        thumbnail: data.thumbnail,
-        movieId: data.movieId,
+        thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+        movieId: data.id,
         nameRU: data.nameRU,
         nameEN: data.nameEN
       }),

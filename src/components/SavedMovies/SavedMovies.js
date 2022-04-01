@@ -5,7 +5,7 @@ import Footer             from '../Footer/Footer.js';
 import React, {useEffect} from 'react';
 import {useFindMovie}     from '../../utils/hooks/useFindMovie.js';
 
-function SavedMovies({loggedIn, movies}) {
+function SavedMovies({loggedIn, movies, onMovieDel}) {
   const {
     short,
     setShort,
@@ -39,6 +39,7 @@ function SavedMovies({loggedIn, movies}) {
       <MoviesCardList
         movies={filteredMovies}
         short={short}
+        onMovieDel={onMovieDel}
       />
       {/*<Preloader/>*/}
       <Footer/>

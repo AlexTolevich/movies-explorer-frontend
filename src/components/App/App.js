@@ -17,7 +17,6 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
 
 
-
   /**
    * Функция загрузки данных фильмов посредством методов API с сохранением и извлечением данных в LocalStorage
    * @param setState - функция обновления состояния стейт переменной
@@ -47,11 +46,37 @@ function App() {
   //   getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
   // }, [loggedIn]);
 
+  useEffect(() => {
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  },[savedMovies])
 
+  function onMovieSave(movie) {
+    const isSaved = savedMovies?.some(i => i.movieId === movie.id);
 
+    if (!isSaved) {
+      mainApi.postMovie(movie)
+        .then((newMovie) => {
+          setSavedMovies([newMovie, ...savedMovies])
+        })
+        .catch(err => console.log(err));
+    } else {
+      const id = savedMovies.find(item => item.movieId === movie.id)._id;
+      mainApi.deleteMovie(id)
+        .then(
+          setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
+        )
+        .catch(err => console.log(err));
+    }
+  }
 
-
-
+  function onMovieDel(movie) {
+      const id = movie._id;
+      mainApi.deleteMovie(id)
+        .then(
+          setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
+        )
+        .catch(err => console.log(err));
+  }
 
   return (
     <div className="app">
@@ -70,7 +95,8 @@ function App() {
                  <Movies
                    loggedIn={true}
                    movies={movies}
-
+                   savedMovies={savedMovies}
+                   onMovieSave={onMovieSave}
                  />
                }/>
 
@@ -79,7 +105,7 @@ function App() {
                  <SavedMovies
                    loggedIn={true}
                    movies={savedMovies}
-
+                   onMovieDel={onMovieDel}
                  />
                }/>
 

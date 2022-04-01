@@ -7,7 +7,7 @@ import {useFindMovie} from '../../utils/hooks/useFindMovie.js';
 
 // import Preloader      from '../Preloader/Preloader.js';
 
-function Movies({loggedIn, movies}) {
+function Movies({loggedIn, movies, savedMovies, onMovieSave}) {
 
   const {
     short,
@@ -32,6 +32,8 @@ function Movies({loggedIn, movies}) {
       <MoviesCardList
         short={short}
         movies={filteredMovies}
+        savedMovies={savedMovies}
+        onMovieSave={onMovieSave}
       />
       {/*<Preloader/>*/}
       <Footer/>

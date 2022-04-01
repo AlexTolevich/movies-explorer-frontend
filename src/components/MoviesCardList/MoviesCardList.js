@@ -3,7 +3,7 @@ import MoviesCard          from '../MoviesCard/MoviesCard.js';
 import {useLocation}       from 'react-router-dom';
 import {useOutMovDepWidth} from '../../utils/hooks/useOutMovDepWidth.js'
 
-function MoviesCardList({movies}) {
+function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel}) {
   const path = useLocation();
   const {
     finalArrMovies,
@@ -17,7 +17,10 @@ function MoviesCardList({movies}) {
           .map((movie) =>
             <MoviesCard
               key={movie.id || movie._id}
-              movie={movie}/>)}
+              movie={movie}
+              savedMovies={savedMovies}
+              onMovieSave={onMovieSave}
+              onMovieDel={onMovieDel}/>)}
       </section>
       <section className="movies-card-list__more">
         {Boolean(path.pathname === '/movies' & (movies.length > finalArrMovies.length)) &&

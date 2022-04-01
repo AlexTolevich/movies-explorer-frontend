@@ -14,6 +14,13 @@
   width: 100%;
   object-fit: cover;
   height: 151px;
+  transition: 0.3s;
+}
+
+.movies-card__image:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  opacity: 0.6;
 }
 
 .movies-card__title-container {
@@ -89,7 +96,7 @@ input:focus + .movies-card__like-btn {
   box-shadow: 0 0 2px #2BE080;
 }
 
-input:checked + .movies-card__like-btn {
+.movies-card__like-btn_is_saved {
   background-color: #2BE080;
 }
 
