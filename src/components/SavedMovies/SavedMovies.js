@@ -32,6 +32,7 @@ function SavedMovies({loggedIn, movies}) {
     }
   }, [inputSearch]);
 
+
   return (
     <div>
       <Header loggedIn={loggedIn}/>

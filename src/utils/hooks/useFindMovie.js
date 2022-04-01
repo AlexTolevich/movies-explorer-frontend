@@ -4,6 +4,7 @@ export function useFindMovie(movies, isSaved) {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [inputSearch, setInputSearch] = React.useState('');
   const [short, setShort] = React.useState(false);
+  const [timer, setTimer] = React.useState(0);
 
   function updateFilteredMovies(filteredMovies) {
     setFilteredMovies(filteredMovies);
@@ -26,14 +27,15 @@ export function useFindMovie(movies, isSaved) {
     updateShort(JSON.parse(localStorage.getItem(`${isSaved}Short`) || 'false'));
   }, []);
 
-  useEffect(() => {
-    if (inputSearch.length >= 1) {
-      setTimeout(filterMovies, 200, movies, inputSearch);
-    }
-  }, [inputSearch]);
-
   function handleChange(event) {
-    updateInputSearch(event.target.value.toLowerCase());
+    const query = event.target.value.toLowerCase();
+    updateInputSearch(query);
+    if (query.length >= 1) {
+      clearTimeout(timer);
+      setTimer(setTimeout(() => {
+        filterMovies(movies, query);
+      }, 700));
+    }
   }
 
   function filterMovies(movies, input) {
