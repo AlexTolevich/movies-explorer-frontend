@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 export function useOutMovDepWidth(movies) {
   const [winWidth, setWinWidth] = useState(window.innerWidth);
   const [timer, setTimer] = React.useState(0);
-  const [howManyMovies, setHowManyMovies] = React.useState();
+  const [howManyMovies, setHowManyMovies] = React.useState(16);
 
   function detectResize() {
     clearTimeout(timer);

@@ -1,10 +1,13 @@
 import React, {useEffect} from 'react';
+import {useLocation}      from 'react-router-dom';
 
 export function useFindMovie(movies, isSaved) {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [inputSearch, setInputSearch] = React.useState('');
   const [short, setShort] = React.useState(false);
   const [timer, setTimer] = React.useState(0);
+
+  const path = useLocation();
 
   function updateFilteredMovies(filteredMovies) {
     setFilteredMovies(filteredMovies);
@@ -35,6 +38,10 @@ export function useFindMovie(movies, isSaved) {
       setTimer(setTimeout(() => {
         filterMovies(movies, query, short);
       }, 700));
+    } else if(path.pathname === '/movies') {
+       updateFilteredMovies([]);
+    } else if(path.pathname === '/saved-movies') {
+      updateFilteredMovies(movies);
     }
   }
 

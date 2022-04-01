@@ -26,11 +26,11 @@ function SavedMovies({loggedIn, movies}) {
     }
   }, [movies]);
 
-  useEffect(() => {
-    if (inputSearch.length === 0) {
-      updateFilteredMovies(movies);
-    }
-  }, [inputSearch]);
+  // useEffect(() => {
+  //   if (inputSearch.length === 0) {
+  //     updateFilteredMovies(movies);
+  //   }
+  // }, [inputSearch]);
 
 
   return (

@@ -19,11 +19,11 @@ function Movies({loggedIn, movies}) {
     updateFilteredMovies
   } = useFindMovie(movies, 'all');
 
-  useEffect(() => {
-    if (inputSearch.length === 0) {
-        updateFilteredMovies([]);
-    }
-  }, [inputSearch]);
+  // useEffect(() => {
+  //   if (inputSearch.length === 0) {
+  //       updateFilteredMovies([]);
+  //   }
+  // }, [inputSearch]);
 
   return (
     <>
