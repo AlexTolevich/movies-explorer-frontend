@@ -3,11 +3,11 @@ import MoviesCard          from '../MoviesCard/MoviesCard.js';
 import {useLocation}       from 'react-router-dom';
 import {useOutMovDepWidth} from '../../utils/hooks/useOutMovDepWidth.js'
 
-function MoviesCardList({movies, short}) {
+function MoviesCardList({movies}) {
   const path = useLocation();
   const {
     finalArrMovies,
-    handleMoreMovies
+    handleMoreMovies,
   } = useOutMovDepWidth(movies)
 
   return (

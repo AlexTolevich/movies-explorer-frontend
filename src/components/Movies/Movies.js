@@ -17,13 +17,7 @@ function Movies({loggedIn, movies}) {
     handleChange,
     onSubmitSearch,
     updateFilteredMovies
-  } = useFindMovie(movies, 'all');
-
-  // useEffect(() => {
-  //   if (inputSearch.length === 0) {
-  //       updateFilteredMovies([]);
-  //   }
-  // }, [inputSearch]);
+  } = useFindMovie(movies, 'all', false);
 
   return (
     <>

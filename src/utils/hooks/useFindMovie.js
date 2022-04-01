@@ -1,13 +1,17 @@
 import React, {useEffect} from 'react';
-import {useLocation}      from 'react-router-dom';
 
-export function useFindMovie(movies, isSaved) {
+/**
+ * Кастомный Хук для фильтрации массива по ключевым символам введенным в input и состоянию чекбокса
+ * @param movies - [] массив входящих данных
+ * @param isSaved - "" текстовые данные используемые для формирования имени ключа сохраняемых данных в LocalStorage
+ * @param initialStateRender - true/false - состояние наполнения массива (movies/[]) при отсутствии данных в input
+ * @returns {{setFilteredMovies: (value: (((prevState: *[]) => *[]) | *[])) => void, handleShort: handleShort, setInputSearch: (value: (((prevState: string) => string) | string)) => void, handleChange: handleChange, updateFilteredMovies: updateFilteredMovies, short: boolean, filteredMovies: *[], inputSearch: string, setShort: (value: (((prevState: boolean) => boolean) | boolean)) => void, onSubmitSearch: onSubmitSearch}}
+ */
+export function useFindMovie(movies, isSaved, initialStateRender) {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [inputSearch, setInputSearch] = React.useState('');
   const [short, setShort] = React.useState(false);
   const [timer, setTimer] = React.useState(0);
-
-  const path = useLocation();
 
   function updateFilteredMovies(filteredMovies) {
     setFilteredMovies(filteredMovies);
@@ -38,10 +42,8 @@ export function useFindMovie(movies, isSaved) {
       setTimer(setTimeout(() => {
         filterMovies(movies, query, short);
       }, 700));
-    } else if(path.pathname === '/movies') {
-       updateFilteredMovies([]);
-    } else if(path.pathname === '/saved-movies') {
-      updateFilteredMovies(movies);
+    } else {
+      initialStateRender ? updateFilteredMovies(movies) : updateFilteredMovies([]);
     }
   }
 
@@ -56,8 +58,9 @@ export function useFindMovie(movies, isSaved) {
   }
 
   function handleShort(event) {
-    updateShort(!short);
-    filterMovies(movies, inputSearch, event.target.checked);
+    const inputShortCheckBox = event.target.checked;
+    updateShort(inputShortCheckBox);
+    filterMovies(movies, inputSearch, inputShortCheckBox);
   }
 
   function onSubmitSearch(event) {

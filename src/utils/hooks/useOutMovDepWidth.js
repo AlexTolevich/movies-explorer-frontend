@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react';
 
+/**
+ * Кастомный Хук обработки данных массива для отображения при различной ширине экрана и обработка нажатия кнопки "Ещё"
+ * @param movies - [] массив входящих данных
+ * @returns {{handleMoreMovies: handleMoreMovies, finalArrMovies}}
+ */
 export function useOutMovDepWidth(movies) {
   const [winWidth, setWinWidth] = useState(window.innerWidth);
   const [timer, setTimer] = React.useState(0);
@@ -29,15 +34,13 @@ export function useOutMovDepWidth(movies) {
     }
   }, [winWidth]);
 
-
-
   function handleMoreMovies() {
     if (winWidth >= 1280) {
-      return  setHowManyMovies( howManyMovies + 4)
+      setHowManyMovies( howManyMovies + 4)
     } else if (winWidth >= 1024) {
-      return  setHowManyMovies( howManyMovies + 3)
+      setHowManyMovies( howManyMovies + 3)
     } else if (winWidth >= 320) {
-      return setHowManyMovies( howManyMovies + 2)
+      setHowManyMovies( howManyMovies + 2)
     }
   }
 
@@ -45,7 +48,6 @@ export function useOutMovDepWidth(movies) {
 
   return {
     finalArrMovies,
-    handleMoreMovies
+    handleMoreMovies,
   }
-
 }
