@@ -1,8 +1,35 @@
 import './Register.css';
+import React  from 'react';
 import logo   from '../../images/logo.svg';
 import {Link} from 'react-router-dom';
 
-function Register({userName}) {
+
+function Register({onRegister}) {
+  const [name, setName] = React.useState()
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function handleChangeName(event) {
+    setName(event.target.value);
+  }
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!name || !email || !password) {
+      return
+    }
+    onRegister(email, password, name);
+    console.log(name, email, password)
+  }
+
   return (
     <section className="register">
       <Link to="/">
@@ -13,17 +40,15 @@ function Register({userName}) {
         />
       </Link>
       <h2 className="register__title">Добро пожаловать!</h2>
-      <form className="register__form">
+      <form className="register__form" onSubmit={handleSubmit}>
         <label className="register__label">Имя</label>
         <input
           aria-label="Ваше имя"
           name="name"
           id="register-name"
           className="register__input"
-          placeholder={userName}
           minLength="2"
-          // onChange={handleChangeEmail}
-          // value={email}
+          onChange={handleChangeName}
           required
         />
         <span id="name-error" className="register__error"/>
@@ -35,10 +60,8 @@ function Register({userName}) {
           name="email"
           id="register-email"
           className="register__input"
-          placeholder="pochta@yandex.ru|"
           minLength="2"
-          // onChange={handleChangeEmail}
-          // value={email}
+          onChange={handleChangeEmail}
           required
         />
         <span id="email-error" className="register__error"/>
@@ -50,14 +73,12 @@ function Register({userName}) {
           name="password"
           id="password"
           className="register__input"
-          placeholder="Пароль"
           minLength="6"
           maxLength="200"
-          // onChange={handleChangePassword}
-          // value={password}
+          onChange={handleChangePassword}
           required
         />
-        <span id="password-error" className="register__error register__error_visible">Что-то пошло не так...</span>
+        <span id="password-error" className="register__error">Что-то пошло не так...</span>
         <button type="submit" className="register__button">Зарегистрироваться</button>
       </form>
       <p className="register__text">

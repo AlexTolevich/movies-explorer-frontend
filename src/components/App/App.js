@@ -12,10 +12,29 @@ import {moviesApi}                            from '../../utils/MoviesApi.js';
 import {mainApi}                              from '../../utils/MainApi.js';
 
 function App() {
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
 
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      // проверяем токен пользователя
+      mainApi
+        .checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          console.log(`Ошибка проверки токена: ${err}`);
+          setLoggedIn(false);
+        });
+    }
+  }, []);
 
   /**
    * Функция загрузки данных фильмов посредством методов API с сохранением и извлечением данных в LocalStorage
@@ -48,7 +67,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  },[savedMovies])
+  }, [savedMovies])
 
   function onMovieSave(movie) {
     const isSaved = savedMovies?.some(i => i.movieId === movie.id);
@@ -70,12 +89,42 @@ function App() {
   }
 
   function onMovieDel(movie) {
-      const id = movie._id;
-      mainApi.deleteMovie(id)
-        .then(
-          setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
-        )
-        .catch(err => console.log(err));
+    const id = movie._id;
+    mainApi.deleteMovie(id)
+      .then(
+        setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
+      )
+      .catch(err => console.log(err));
+  }
+
+  function onLogin(email, password) {
+    mainApi
+      .signin(email, password)
+      .then(res => {
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          setLoggedIn(true);
+          navigate('/movies');
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка входа: ${err}`);
+      });
+  }
+
+  function onRegister(email, password, name) {
+    mainApi
+      .signup(email, password, name)
+      .then(res => {
+        if (res._id) {
+          navigate('/movies');
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка регистрации: ${err}`);
+      })
+      .finally(() => {
+      });
   }
 
   return (
@@ -85,7 +134,7 @@ function App() {
         <Route path="/profile"
                element={
                  <Profile
-                   loggedIn={true}
+                   loggedIn={loggedIn}
                    userName={'Виталий'}
                  />
                }/>
@@ -93,7 +142,7 @@ function App() {
         <Route path="/movies"
                element={
                  <Movies
-                   loggedIn={true}
+                   loggedIn={loggedIn}
                    movies={movies}
                    savedMovies={savedMovies}
                    onMovieSave={onMovieSave}
@@ -103,7 +152,7 @@ function App() {
         <Route path="/saved-movies"
                element={
                  <SavedMovies
-                   loggedIn={true}
+                   loggedIn={loggedIn}
                    movies={savedMovies}
                    onMovieDel={onMovieDel}
                  />
@@ -111,17 +160,17 @@ function App() {
 
         <Route path="/signup"
                element={
-                 <Register userName={'Виталий'}/>
+                 <Register onRegister={onRegister}/>
                }/>
 
         <Route path="/signin"
                element={
-                 <Login/>
+                 <Login onLogin={onLogin}/>
                }/>
 
         <Route path="/"
                element={
-                 <Main loggedIn={false}/>
+                 <Main loggedIn={loggedIn}/>
                }/>
 
         <Route path="*"

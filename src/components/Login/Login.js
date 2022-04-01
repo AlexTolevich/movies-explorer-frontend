@@ -1,8 +1,28 @@
 import './Login.css';
-import logo   from '../../images/logo.svg';
+import React from 'react';
+import logo  from '../../images/logo.svg';
 import {Link} from 'react-router-dom';
 
-function Login() {
+function Login({onLogin}) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleChangePassword(event) {
+    setPassword(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!email || !password) {
+      return;
+    }
+    onLogin(email, password);
+  }
+
   return (
     <section className="login">
       <Link to="/">
@@ -13,8 +33,7 @@ function Login() {
         />
       </Link>
       <h2 className="login__title">Рады видеть!</h2>
-      <form className="login__form">
-
+      <form className="login__form" onSubmit={handleSubmit}>
         <label className="login__label">E-mail</label>
         <input
           aria-label="Ваша почта"
@@ -24,8 +43,8 @@ function Login() {
           className="login__input"
           placeholder="pochta@yandex.ru|"
           minLength="2"
-          // onChange={handleChangeEmail}
-          // value={email}
+          onChange={handleChangeEmail}
+          value={email}
           required
         />
         <span id="email-error" className="login__error"/>
@@ -40,8 +59,8 @@ function Login() {
           placeholder="Пароль"
           minLength="6"
           maxLength="200"
-          // onChange={handleChangePassword}
-          // value={password}
+          onChange={handleChangePassword}
+          value={password}
           required
         />
         <span id="password-error" className="login__error login__error_visible"/>

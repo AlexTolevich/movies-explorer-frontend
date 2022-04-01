@@ -13,14 +13,22 @@ class MainApi {
   }
 
   getMovies() {
-    return fetch(`${this._baseUrl}movies`, {headers: this._headers})
+    return fetch(`${this._baseUrl}movies`, {
+      headers: {
+        ...this._headers,
+        'Authorization': `Bearer ${this._token}`,
+      },
+    })
       .then(this._checkResponse);
   }
 
   postMovie(data) {
     return fetch(`${this._baseUrl}movies`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'Authorization': `Bearer ${this._token}`,
+      },
       body: JSON.stringify({
         country: data.country,
         director: data.director,
@@ -41,7 +49,10 @@ class MainApi {
   deleteMovie(id) {
     return fetch(`${this._baseUrl}movies/${id}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        ...this._headers,
+        'Authorization': `Bearer ${this._token}`,
+      },
     })
       .then(this._checkResponse);
   }
@@ -61,38 +72,37 @@ class MainApi {
       headers: this._headers,
       body: JSON.stringify({email, password})
     })
-      .then(this._checkResponse)
-      .then(data => {
-        localStorage.setItem('jwt', data.jwt);
-        localStorage.setItem('email', data.email);
-        return data;
-      });
-  }
-
-  getUser() {
-    return fetch(`${this._baseUrl}users/me`, {
-      method: 'GET',
-      headers: this._headers,
-    })
       .then(this._checkResponse);
   }
+
+  // getUser() {
+  //   return fetch(`${this._baseUrl}users/me`, {
+  //     method: 'GET',
+  //     headers: this._headers,
+  //   })
+  //     .then(this._checkResponse);
+  // }
 
   patchUser(data) {
     return fetch(`${this._baseUrl}users/me`,
       {
         method: 'PATCH',
-        headers: this._headers,
+        headers: {
+          ...this._headers,
+          'Authorization': `Bearer ${this._token}`,
+        },
         body: JSON.stringify({name: data.name, email: data.email})
       })
       .then(this._checkResponse);
   }
 
   checkToken(token) {
+    this._token = token;
     return fetch(`${this._baseUrl}users/me`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${this._token}`,
       }
     })
       .then(this._checkResponse);
@@ -104,7 +114,6 @@ const mainApi = new MainApi({
   baseUrl: 'http://localhost:3010/',
   headers: {
     'Accept': 'application/json', 'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQ0MDE0MTIxNzI2ZWFhZGM4Y2QyNDEiLCJpYXQiOjE2NDg2MjM5NTcsImV4cCI6MTY0OTIyODc1N30.vBsWlHv9XosPLvuGvXgG-0OCVjU2kaNBREslEBI_qwE',
   },
 });
 
