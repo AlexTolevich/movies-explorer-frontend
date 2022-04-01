@@ -33,21 +33,24 @@ export function useFindMovie(movies, isSaved) {
     if (query.length >= 1) {
       clearTimeout(timer);
       setTimer(setTimeout(() => {
-        filterMovies(movies, query);
+        filterMovies(movies, query, short);
       }, 700));
     }
   }
 
-  function filterMovies(movies, input) {
+  function filterMovies(movies, input, shortCheck) {
     updateFilteredMovies(movies
       .filter(({
                  nameRU,
-                 nameEN
-               }) => nameRU.toLowerCase().includes(input) || nameEN?.toLowerCase().includes(input)))
+                 nameEN,
+                 duration,
+               }) => (nameRU.toLowerCase().includes(input) || nameEN?.toLowerCase().includes(input))
+        & (!shortCheck || duration <= 40)))
   }
 
-  function handleShort() {
+  function handleShort(event) {
     updateShort(!short);
+    filterMovies(movies, inputSearch, event.target.checked);
   }
 
   function onSubmitSearch(event) {

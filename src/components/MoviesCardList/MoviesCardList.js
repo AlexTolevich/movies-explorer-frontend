@@ -1,7 +1,7 @@
 import './MoviesCardList.css'
-import MoviesCard                   from '../MoviesCard/MoviesCard.js';
-import {useLocation}                from 'react-router-dom';
-import {useOutMovDepWidth}          from '../../utils/hooks/useOutMovDepWidth.js'
+import MoviesCard          from '../MoviesCard/MoviesCard.js';
+import {useLocation}       from 'react-router-dom';
+import {useOutMovDepWidth} from '../../utils/hooks/useOutMovDepWidth.js'
 
 function MoviesCardList({movies, short}) {
   const path = useLocation();
@@ -14,7 +14,6 @@ function MoviesCardList({movies, short}) {
     <>
       <section className="movies-card-list" aria-label="Фильмы">
         {finalArrMovies
-          .filter(movie => !short || movie.duration <= 40)
           .map((movie) =>
             <MoviesCard
               key={movie.id || movie._id}
