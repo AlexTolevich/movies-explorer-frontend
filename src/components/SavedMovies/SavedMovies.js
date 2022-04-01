@@ -19,11 +19,9 @@ function SavedMovies({loggedIn, movies, onMovieDel}) {
   } = useFindMovie(movies, 'save', true);
 
   useEffect(() => {
-    if (filteredMovies.length === 0) {
-      updateFilteredMovies(movies);
-      setShort(false);
-      setInputSearch('');
-    }
+    updateFilteredMovies(movies);
+    setShort(false);
+    setInputSearch('');
   }, [movies]);
 
   return (
