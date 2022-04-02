@@ -85,6 +85,8 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 1.23;
+  background: none;
+  border: none;
   color: #ff4062;
   text-decoration: none;
   cursor: pointer;

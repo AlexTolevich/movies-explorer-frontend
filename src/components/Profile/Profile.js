@@ -4,7 +4,7 @@ import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 import Header               from '../Header/Header.js';
 import {Link}               from 'react-router-dom';
 
-function Profile({loggedIn, onUpdateUser}) {
+function Profile({loggedIn, onUpdateUser, onSignOut}) {
   const currentUser = React.useContext(CurrentUserContext);
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
@@ -60,7 +60,7 @@ function Profile({loggedIn, onUpdateUser}) {
           <span id="email-error" className="profile__error"/>
           <button type="submit" className="profile__edit-btn">Редактировать</button>
         </form>
-        <Link className="profile__signout" to="/signin">Выйти из аккаунта</Link>
+        <button className="profile__signout" onClick={onSignOut}>Выйти из аккаунта</button>
       </div>
     </>
   )

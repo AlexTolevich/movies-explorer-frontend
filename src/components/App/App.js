@@ -31,7 +31,6 @@ function App() {
           if (res) {
             setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id})
             setLoggedIn(true);
-            console.log(res)
           }
         })
         .catch((err) => {
@@ -135,8 +134,6 @@ function App() {
       });
   }
 
-  console.log(loggedIn)
-
   function handleUpdateProfile(name, email) {
     mainApi
       .patchUser(name, email)
@@ -146,6 +143,14 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка обновления данных профиля: ${err}`);
       })
+  }
+
+  function onSignOut() {
+    setLoggedIn(false);
+    window.localStorage.clear();
+    setSavedMovies({});
+    setCurrentUser({});
+    navigate('/');
   }
 
   return (
@@ -159,6 +164,7 @@ function App() {
                      component={Profile}
                      loggedIn={loggedIn}
                      onUpdateUser={handleUpdateProfile}
+                     onSignOut={onSignOut}
                    />
                  }/>
 
