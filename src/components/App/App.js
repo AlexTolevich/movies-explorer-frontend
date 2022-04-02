@@ -15,7 +15,7 @@ import {CurrentUserContext}                   from '../../contexts/CurrentUserCo
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(null);
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
 
@@ -31,15 +31,16 @@ function App() {
           if (res) {
             setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id})
             setLoggedIn(true);
-            console.log(currentUser)
+            console.log(res)
           }
         })
         .catch((err) => {
           console.log(`Ошибка проверки токена: ${err}`);
           setLoggedIn(false);
         });
+    } else {
+      setLoggedIn(false);
     }
-    setLoggedIn(false);
   }, []);
 
   /**
@@ -62,17 +63,19 @@ function App() {
   }
 
   useEffect(() => {
-    getMovies(setMovies, 'movies', moviesApi.getMovies);
-    getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
+    if (loggedIn) {
+      getMovies(setMovies, 'movies', moviesApi.getMovies)
+      getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
+    }
   }, [loggedIn, currentUser]);
 
   // useEffect(() => {
   //   getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
   // }, [loggedIn]);
 
-  useEffect(() => {
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  }, [savedMovies])
+  // useEffect(() => {
+  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+  // }, [savedMovies])
 
   function onMovieSave(movie) {
     const isSaved = savedMovies?.some(i => i.movieId === movie.id);
@@ -131,7 +134,9 @@ function App() {
       .finally(() => {
       });
   }
-console.log(loggedIn)
+
+  console.log(loggedIn)
+
   function handleUpdateProfile(name, email) {
     mainApi
       .patchUser(name, email)
@@ -179,13 +184,15 @@ console.log(loggedIn)
                  }/>
 
           <Route path="/signup"
-                 element={
-                   <Register onRegister={onRegister}/>
+                 element={!loggedIn
+                   ? <Register onRegister={onRegister}/>
+                   : <Navigate to="/movies"/>
                  }/>
 
           <Route path="/signin"
-                 element={
-                   <Login onLogin={onLogin}/>
+                 element={!loggedIn
+                   ? <Login onLogin={onLogin}/>
+                   : <Navigate to="/movies"/>
                  }/>
 
           <Route path="/"
