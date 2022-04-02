@@ -1,6 +1,7 @@
 import React, {useEffect}                     from 'react';
 import {Route, Routes, Navigate, useNavigate} from 'react-router-dom';
 import './App.css';
+import ProtectedRoute                         from '../ProtectedRoute/ProtectedRoute.js';
 import Main                                   from '../Main/Main.js';
 import Movies                                 from '../Movies/Movies.js';
 import SavedMovies                            from '../SavedMovies/SavedMovies.js';
@@ -14,7 +15,7 @@ import {CurrentUserContext}                   from '../../contexts/CurrentUserCo
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
 
@@ -63,8 +64,7 @@ function App() {
   useEffect(() => {
     getMovies(setMovies, 'movies', moviesApi.getMovies);
     getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
-
-  }, []);
+  }, [loggedIn, currentUser]);
 
   // useEffect(() => {
   //   getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
@@ -131,7 +131,7 @@ function App() {
       .finally(() => {
       });
   }
-
+console.log(loggedIn)
   function handleUpdateProfile(name, email) {
     mainApi
       .patchUser(name, email)
@@ -150,7 +150,8 @@ function App() {
 
           <Route path="/profile"
                  element={
-                   <Profile
+                   <ProtectedRoute
+                     component={Profile}
                      loggedIn={loggedIn}
                      onUpdateUser={handleUpdateProfile}
                    />
@@ -158,7 +159,8 @@ function App() {
 
           <Route path="/movies"
                  element={
-                   <Movies
+                   <ProtectedRoute
+                     component={Movies}
                      loggedIn={loggedIn}
                      movies={movies}
                      savedMovies={savedMovies}
@@ -168,7 +170,8 @@ function App() {
 
           <Route path="/saved-movies"
                  element={
-                   <SavedMovies
+                   <ProtectedRoute
+                     component={SavedMovies}
                      loggedIn={loggedIn}
                      movies={savedMovies}
                      onMovieDel={onMovieDel}

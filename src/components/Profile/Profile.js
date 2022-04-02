@@ -1,8 +1,8 @@
 import './Profile.css'
-import React, {useEffect}   from 'react';
+import React                from 'react';
 import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
-import Header from '../Header/Header.js';
-import {Link} from 'react-router-dom';
+import Header               from '../Header/Header.js';
+import {Link}               from 'react-router-dom';
 
 function Profile({loggedIn, onUpdateUser}) {
   const currentUser = React.useContext(CurrentUserContext);
