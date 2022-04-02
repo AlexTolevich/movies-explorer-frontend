@@ -1,14 +1,36 @@
 import './Profile.css'
+import React, {useEffect}   from 'react';
+import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
 import Header from '../Header/Header.js';
 import {Link} from 'react-router-dom';
 
-function Profile({loggedIn, userName}) {
+function Profile({loggedIn, onUpdateUser}) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const [email, setEmail] = React.useState('');
+  const [name, setName] = React.useState('');
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleChangeName(event) {
+    setName(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!name || !email) {
+      return;
+    }
+    onUpdateUser(name, email);
+  }
+
   return (
     <>
       <Header loggedIn={loggedIn}/>
       <div className="profile">
-        <h2 className="profile__header">Привет, {userName}!</h2>
-        <form className="profile__form">
+        <h2 className="profile__header">Привет, {currentUser.name}!</h2>
+        <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__input-container">
             <label className="profile__label">Имя</label>
             <input
@@ -16,10 +38,8 @@ function Profile({loggedIn, userName}) {
               name="profile-name"
               id="profile-name"
               className="profile__input"
-              placeholder={userName}
               minLength="2"
-              // value={email}
-              // onChange={handleChangeEmail}
+              onChange={handleChangeName}
               required
             />
           </div>
@@ -32,10 +52,8 @@ function Profile({loggedIn, userName}) {
               name="email"
               id="email"
               className="profile__input"
-              placeholder="pochta@yandex.ru"
               minLength="6"
-              // value={email}
-              // onChange={handleChangeEmail}
+              onChange={handleChangeEmail}
               required
             />
           </div>

@@ -10,8 +10,10 @@ import Register                               from '../Register/Register.js';
 import Login                                  from '../Login/Login.js';
 import {moviesApi}                            from '../../utils/MoviesApi.js';
 import {mainApi}                              from '../../utils/MainApi.js';
+import {CurrentUserContext}                   from '../../contexts/CurrentUserContext.js';
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(true);
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
@@ -26,7 +28,9 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           if (res) {
+            setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id})
             setLoggedIn(true);
+            console.log(currentUser)
           }
         })
         .catch((err) => {
@@ -34,6 +38,7 @@ function App() {
           setLoggedIn(false);
         });
     }
+    setLoggedIn(false);
   }, []);
 
   /**
@@ -127,59 +132,72 @@ function App() {
       });
   }
 
+  function handleUpdateProfile(name, email) {
+    mainApi
+      .patchUser(name, email)
+      .then((user) => {
+        setCurrentUser({name: user.user.name, email: user.user.email, id: user.user._id});
+      })
+      .catch((err) => {
+        console.log(`Ошибка обновления данных профиля: ${err}`);
+      })
+  }
+
   return (
-    <div className="app">
-      <Routes>n
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <Routes>n
 
-        <Route path="/profile"
-               element={
-                 <Profile
-                   loggedIn={loggedIn}
-                   userName={'Виталий'}
-                 />
-               }/>
+          <Route path="/profile"
+                 element={
+                   <Profile
+                     loggedIn={loggedIn}
+                     onUpdateUser={handleUpdateProfile}
+                   />
+                 }/>
 
-        <Route path="/movies"
-               element={
-                 <Movies
-                   loggedIn={loggedIn}
-                   movies={movies}
-                   savedMovies={savedMovies}
-                   onMovieSave={onMovieSave}
-                 />
-               }/>
+          <Route path="/movies"
+                 element={
+                   <Movies
+                     loggedIn={loggedIn}
+                     movies={movies}
+                     savedMovies={savedMovies}
+                     onMovieSave={onMovieSave}
+                   />
+                 }/>
 
-        <Route path="/saved-movies"
-               element={
-                 <SavedMovies
-                   loggedIn={loggedIn}
-                   movies={savedMovies}
-                   onMovieDel={onMovieDel}
-                 />
-               }/>
+          <Route path="/saved-movies"
+                 element={
+                   <SavedMovies
+                     loggedIn={loggedIn}
+                     movies={savedMovies}
+                     onMovieDel={onMovieDel}
+                   />
+                 }/>
 
-        <Route path="/signup"
-               element={
-                 <Register onRegister={onRegister}/>
-               }/>
+          <Route path="/signup"
+                 element={
+                   <Register onRegister={onRegister}/>
+                 }/>
 
-        <Route path="/signin"
-               element={
-                 <Login onLogin={onLogin}/>
-               }/>
+          <Route path="/signin"
+                 element={
+                   <Login onLogin={onLogin}/>
+                 }/>
 
-        <Route path="/"
-               element={
-                 <Main loggedIn={loggedIn}/>
-               }/>
+          <Route path="/"
+                 element={
+                   <Main loggedIn={loggedIn}/>
+                 }/>
 
-        <Route path="*"
-               element={
-                 <NotFound/>
-               }/>
+          <Route path="*"
+                 element={
+                   <NotFound/>
+                 }/>
 
-      </Routes>
-    </div>
+        </Routes>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

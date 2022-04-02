@@ -83,7 +83,7 @@ class MainApi {
   //     .then(this._checkResponse);
   // }
 
-  patchUser(data) {
+  patchUser(name, email) {
     return fetch(`${this._baseUrl}users/me`,
       {
         method: 'PATCH',
@@ -91,7 +91,7 @@ class MainApi {
           ...this._headers,
           'Authorization': `Bearer ${this._token}`,
         },
-        body: JSON.stringify({name: data.name, email: data.email})
+        body: JSON.stringify({name: name, email: email})
       })
       .then(this._checkResponse);
   }

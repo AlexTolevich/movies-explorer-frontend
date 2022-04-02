@@ -48,6 +48,7 @@ function Register({onRegister}) {
           id="register-name"
           className="register__input"
           minLength="2"
+          maxLength="30"
           onChange={handleChangeName}
           required
         />
