@@ -104,9 +104,9 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  function onLogin(email, password) {
+  function onLogin(data) {
     mainApi
-      .signin(email, password)
+      .signin(data)
       .then(res => {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
@@ -119,13 +119,11 @@ function App() {
       });
   }
 
-  function onRegister(email, password, name) {
+  function onRegister(data) {
     mainApi
-      .signup(email, password, name)
-      .then(res => {
-        if (res._id) {
-          navigate('/movies');
-        }
+      .signup(data)
+      .then(() => {
+        onLogin(data);
       })
       .catch((err) => {
         console.log(`Ошибка регистрации: ${err}`);
@@ -134,11 +132,11 @@ function App() {
       });
   }
 
-  function handleUpdateProfile(name, email) {
+  function handleUpdateProfile(data) {
     mainApi
-      .patchUser(name, email)
+      .patchUser(data)
       .then((user) => {
-        setCurrentUser({name: user.user.name, email: user.user.email, id: user.user._id});
+        setCurrentUser({name: user.name, email: user.email, id: user._id});
       })
       .catch((err) => {
         console.log(`Ошибка обновления данных профиля: ${err}`);

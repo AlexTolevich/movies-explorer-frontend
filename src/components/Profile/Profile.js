@@ -1,28 +1,24 @@
 import './Profile.css'
-import React                from 'react';
-import {CurrentUserContext} from '../../contexts/CurrentUserContext.js';
-import Header               from '../Header/Header.js';
-import {Link}               from 'react-router-dom';
+import React, {useEffect}      from 'react';
+import {CurrentUserContext}    from '../../contexts/CurrentUserContext.js';
+import Header                  from '../Header/Header.js';
+import {useFormWithValidation} from '../../utils/hooks/useValidation.js';
 
 function Profile({loggedIn, onUpdateUser, onSignOut}) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [email, setEmail] = React.useState('');
-  const [name, setName] = React.useState('');
 
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
-  }
+  const {values, handleChange, errors, isValid, resetForm} = useFormWithValidation();
 
-  function handleChangeName(event) {
-    setName(event.target.value);
-  }
+  useEffect(() => {
+    resetForm();
+  }, [resetForm]);
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (!name || !email) {
-      return;
-    }
-    onUpdateUser(name, email);
+    onUpdateUser({
+      name: values.name,
+      email: values.email
+    });
   }
 
   return (
@@ -30,20 +26,22 @@ function Profile({loggedIn, onUpdateUser, onSignOut}) {
       <Header loggedIn={loggedIn}/>
       <div className="profile">
         <h2 className="profile__header">Привет, {currentUser.name}!</h2>
-        <form className="profile__form" onSubmit={handleSubmit}>
+        <form className="profile__form" onSubmit={handleSubmit} noValidate>
           <div className="profile__input-container">
             <label className="profile__label">Имя</label>
             <input
               aria-label="Ваше имя"
-              name="profile-name"
+              name="name"
               id="profile-name"
               className="profile__input"
               minLength="2"
-              onChange={handleChangeName}
+              onChange={handleChange}
               required
             />
           </div>
-          <span id="name-error" className="profile__error"/>
+          <span id="name-error" className={`profile__error ${errors.name && 'profile__error_visible'}`}>
+          {errors.name}
+        </span>
           <div className="profile__input-container">
             <label className="profile__label">E-mail</label>
             <input
@@ -53,12 +51,18 @@ function Profile({loggedIn, onUpdateUser, onSignOut}) {
               id="email"
               className="profile__input"
               minLength="6"
-              onChange={handleChangeEmail}
+              onChange={handleChange}
               required
             />
           </div>
-          <span id="email-error" className="profile__error"/>
-          <button type="submit" className="profile__edit-btn">Редактировать</button>
+          <span id="email-error" className={`profile__error ${errors.email && 'profile__error_visible'}`}>
+          {errors.email}
+        </span>
+          <button type="submit"
+                  className={`profile__edit-btn ${!isValid && 'profile__edit-btn_disabled'}`}
+                  disabled={!isValid}
+          >Редактировать
+          </button>
         </form>
         <button className="profile__signout" onClick={onSignOut}>Выйти из аккаунта</button>
       </div>

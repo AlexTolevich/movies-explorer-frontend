@@ -57,33 +57,25 @@ class MainApi {
       .then(this._checkResponse);
   }
 
-  signup(email, password, name) {
+  signup(data) {
     return fetch(`${this._baseUrl}signup`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({email, password, name})
+      body: JSON.stringify({email: data.email, password: data.password, name: data.name})
     })
       .then(this._checkResponse);
   }
 
-  signin(email, password) {
+  signin(data) {
     return fetch(`${this._baseUrl}signin`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email: data.email, password: data.password})
     })
       .then(this._checkResponse);
   }
 
-  // getUser() {
-  //   return fetch(`${this._baseUrl}users/me`, {
-  //     method: 'GET',
-  //     headers: this._headers,
-  //   })
-  //     .then(this._checkResponse);
-  // }
-
-  patchUser(name, email) {
+  patchUser(data) {
     return fetch(`${this._baseUrl}users/me`,
       {
         method: 'PATCH',
@@ -91,7 +83,7 @@ class MainApi {
           ...this._headers,
           'Authorization': `Bearer ${this._token}`,
         },
-        body: JSON.stringify({name: name, email: email})
+        body: JSON.stringify({name: data.name, email: data.email})
       })
       .then(this._checkResponse);
   }
