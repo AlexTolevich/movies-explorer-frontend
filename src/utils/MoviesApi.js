@@ -32,4 +32,4 @@ const moviesApi = new MoviesApi({
   },
 });
 
-export { moviesApi };
+export {moviesApi};

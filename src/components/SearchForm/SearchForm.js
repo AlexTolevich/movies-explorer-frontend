@@ -1,4 +1,4 @@
-import './SearchForm.css'
+import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox.js';
 
 function SearchForm({onSubmitSearch, short, handleShort, handleChange, inputSearch}) {

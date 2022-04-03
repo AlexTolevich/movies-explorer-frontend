@@ -20,13 +20,13 @@ export function useOutMovDepWidth(movies) {
   useEffect(() => {
     window.addEventListener('resize', detectResize);
     if (winWidth >= 1280) {
-      setHowManyMovies(16)
+      setHowManyMovies(16);
     } else if (winWidth >= 1024) {
-      setHowManyMovies( 9)
+      setHowManyMovies(9);
     } else if (winWidth >= 638) {
-      setHowManyMovies(8)
+      setHowManyMovies(8);
     } else if (winWidth >= 320) {
-      setHowManyMovies( 5)
+      setHowManyMovies(5);
     }
 
     return () => {
@@ -36,11 +36,11 @@ export function useOutMovDepWidth(movies) {
 
   function handleMoreMovies() {
     if (winWidth >= 1280) {
-      setHowManyMovies( howManyMovies + 4)
+      setHowManyMovies(howManyMovies + 4);
     } else if (winWidth >= 1024) {
-      setHowManyMovies( howManyMovies + 3)
+      setHowManyMovies(howManyMovies + 3);
     } else if (winWidth >= 320) {
-      setHowManyMovies( howManyMovies + 2)
+      setHowManyMovies(howManyMovies + 2);
     }
   }
 

@@ -1,7 +1,7 @@
-import "./Footer.css"
+import './Footer.css'
 
-function Footer(){
-  return(
+function Footer() {
+  return (
     <div className="footer">
       <h2 className="footer__header">Учебный проект Яндекс.Практикум х BeatFilm.</h2>
       <div className="footer__text-container">

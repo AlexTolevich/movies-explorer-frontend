@@ -1,9 +1,9 @@
-import "./FilterCheckbox.css"
+import './FilterCheckbox.css'
 import React from 'react';
 
-function FilterCheckbox({short, handleShort}){
+function FilterCheckbox({short, handleShort}) {
 
-  return(
+  return (
     <label className="filter-checkbox">
       <input
         type="checkbox"
@@ -11,7 +11,7 @@ function FilterCheckbox({short, handleShort}){
         checked={short}
         onChange={handleShort}
       />
-        <span className="filter-checkbox__slider"/>
+      <span className="filter-checkbox__slider"/>
     </label>
   )
 }

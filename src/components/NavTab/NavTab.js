@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import './NavTab.css'
 
-function NavTab(){
+function NavTab() {
   return (
     <nav>
       <ul className="nav-tab">
@@ -16,7 +16,6 @@ function NavTab(){
         </li>
       </ul>
     </nav>
-
   )
 }
 

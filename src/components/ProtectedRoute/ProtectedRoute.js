@@ -1,5 +1,5 @@
 import React      from 'react';
-import {Navigate} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Preloader  from '../Preloader/Preloader.js';
 
 function ProtectedRoute({component: Component, ...props}) {

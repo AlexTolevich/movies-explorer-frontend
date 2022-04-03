@@ -4,7 +4,6 @@ import Footer             from '../Footer/Footer.js';
 import SearchForm         from '../SearchForm/SearchForm.js';
 import MoviesCardList     from '../MoviesCardList/MoviesCardList.js';
 import {useFindMovie}     from '../../utils/hooks/useFindMovie.js';
-import {mainApi}          from '../../utils/MainApi.js';
 import {moviesApi}        from '../../utils/MoviesApi.js';
 
 function Movies({loggedIn, savedMovies, onMovieSave}) {
@@ -19,7 +18,6 @@ function Movies({loggedIn, savedMovies, onMovieSave}) {
     handleSwitchShort,
     handleInputChange,
     onSubmitSearch,
-    updateFilteredMovies,
     filterMovies,
   } = useFindMovie(beatFilmMovies, 'beatFilm', false, getMoviesBeatfilm);
 

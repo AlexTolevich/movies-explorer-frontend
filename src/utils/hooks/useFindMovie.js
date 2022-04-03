@@ -32,7 +32,6 @@ export function useFindMovie(movies, isSaved, initialStateRender, getFilm) {
     updateFilteredMovies(JSON.parse(localStorage.getItem(`${isSaved}FilteredMovies`) || '[]'));
     updateInputSearch(localStorage.getItem(`${isSaved}InputSearch`) || '');
     updateShort(JSON.parse(localStorage.getItem(`${isSaved}Short`) || 'false'));
-    // clearTimeout(timer);
   }, []);
 
   function handleInputChange(event) {

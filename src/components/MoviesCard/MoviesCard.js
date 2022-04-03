@@ -18,13 +18,12 @@ function MoviesCard({movie, savedMovies, onMovieSave, onMovieDel}) {
     window.open(movie.trailerLink);
   }
 
-
   return (
     <article className="movies-card">
       <img className="movies-card__image"
            src={path.pathname === '/movies' ?
              `https://api.nomoreparties.co${movie.image.url}`
-           : movie.image}
+             : movie.image}
            alt={movie.nameRU}
            onClick={openTrailer}
       />
