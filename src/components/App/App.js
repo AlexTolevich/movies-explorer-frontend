@@ -46,12 +46,14 @@ function App() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('savedMovies')) {
-      setSavedMovies((JSON.parse(localStorage.getItem('savedMovies'))));
-    } else {
-      getSavedMovies();
+    if (loggedIn) {
+      if (localStorage.getItem('savedMovies')) {
+        setSavedMovies((JSON.parse(localStorage.getItem('savedMovies'))));
+      } else {
+        getSavedMovies();
+      }
     }
-  }, [])
+  }, [loggedIn])
 
   function updateSavedMovies(savedMovies) {
     setSavedMovies(savedMovies);
