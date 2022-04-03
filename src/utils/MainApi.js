@@ -102,8 +102,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  // baseUrl: 'https://api.movies.kuznetsov.nomoredomains.work/',
-  baseUrl: 'http://localhost:3010/',
+  baseUrl: 'https://api.movies.kuznetsov.nomoredomains.work/',
+  // baseUrl: 'http://localhost:3010/',
   headers: {
     'Accept': 'application/json', 'Content-Type': 'application/json',
   },
