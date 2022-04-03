@@ -30,7 +30,7 @@ class MainApi {
         'Authorization': `Bearer ${this._token}`,
       },
       body: JSON.stringify({
-        country: data.country,
+        country: data.country || 'unknown',
         director: data.director,
         duration: data.duration,
         year: data.year,
@@ -40,7 +40,7 @@ class MainApi {
         thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
         movieId: data.id,
         nameRU: data.nameRU,
-        nameEN: data.nameEN || '--'
+        nameEN: data.nameEN || 'unknown'
       }),
     })
       .then(this._checkResponse);

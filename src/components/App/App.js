@@ -9,23 +9,21 @@ import Profile                                from '../Profile/Profile.js';
 import NotFound                               from '../NotFound/NotFound.js';
 import Register                               from '../Register/Register.js';
 import Login                                  from '../Login/Login.js';
-import {moviesApi}                            from '../../utils/MoviesApi.js';
 import {mainApi}                              from '../../utils/MainApi.js';
 import {CurrentUserContext}                   from '../../contexts/CurrentUserContext.js';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(null);
-  const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [showPreloader, setShowPreloader] = React.useState(false);
 
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      getUserData(jwt)
+      getUserData(jwt);
     } else {
       setLoggedIn(false);
     }
@@ -36,7 +34,7 @@ function App() {
       .checkToken(token)
       .then((res) => {
         if (res) {
-          setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id})
+          setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id});
           setLoggedIn(true);
         }
       })
@@ -46,63 +44,43 @@ function App() {
       });
   }
 
-  /**
-   * Функция загрузки данных фильмов посредством методов API с сохранением и извлечением данных в LocalStorage
-   * @param setState - функция обновления состояния стейт переменной
-   * @param localStorageKey - ключ для сохранения/извлечения данных в LocalStorage
-   * @param apiMethod - метод API для загрузки данных
-   */
-  const getMovies = (setState, localStorageKey, apiMethod) => {
-    if (localStorage.getItem(localStorageKey)) {
-      setState((JSON.parse(localStorage.getItem(localStorageKey))));
+  useEffect(() => {
+    if (localStorage.getItem('savedMovies')) {
+      setSavedMovies((JSON.parse(localStorage.getItem('savedMovies'))));
     } else {
-      setShowPreloader(true);
-      apiMethod()
-        .then(data => {
-          setState(data);
-          localStorage.setItem(localStorageKey, JSON.stringify(data));
-        })
-        .catch((err) => {
-          console.log(err)
-          setState([]);
-          localStorage.setItem(localStorageKey, JSON.stringify([]));
-        })
-        .finally(() => setShowPreloader(false));
+      getSavedMovies();
     }
+  }, [])
+
+  function updateSavedMovies(savedMovies) {
+    setSavedMovies(savedMovies);
+    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
   }
 
-  useEffect(() => {
-    if (loggedIn) {
-      getMovies(setMovies, 'movies', moviesApi.getMovies)
-      getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
-    }
-  }, [loggedIn, currentUser]);
-
-  useEffect(() => {
+  function getSavedMovies() {
     setShowPreloader(true);
     mainApi.getMovies()
       .then(data => {
-          setSavedMovies(data);
-          localStorage.setItem('savedMovies', JSON.stringify(data));
+          updateSavedMovies(data);
         }
       ).catch(err => console.log(err))
       .finally(() => setShowPreloader(false));
-  }, [SavedMovies]);
+  }
+
 
   function onMovieSave(movie) {
     const isSaved = savedMovies?.some(i => i.movieId === movie.id);
-
     if (!isSaved) {
       mainApi.postMovie(movie)
         .then((newMovie) => {
-          setSavedMovies([newMovie, ...savedMovies])
+          updateSavedMovies([newMovie, ...savedMovies])
         })
         .catch(err => console.log(err));
     } else {
       const id = savedMovies.find(item => item.movieId === movie.id)._id;
       mainApi.deleteMovie(id)
         .then(() => {
-          setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie));
+          updateSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie));
         })
         .catch(err => console.log(err));
     }
@@ -112,11 +90,10 @@ function App() {
     const id = movie._id;
     mainApi.deleteMovie(id)
       .then(() => {
-        setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
+        updateSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
       })
       .catch(err => console.log(err));
   }
-
 
   function onLogin(data) {
     mainApi
@@ -161,7 +138,7 @@ function App() {
   function onSignOut() {
     setLoggedIn(false);
     window.localStorage.clear();
-    setSavedMovies({});
+    setSavedMovies([]);
     setCurrentUser({});
     navigate('/');
   }
@@ -186,10 +163,8 @@ function App() {
                    <ProtectedRoute
                      component={Movies}
                      loggedIn={loggedIn}
-                     movies={movies}
                      savedMovies={savedMovies}
                      onMovieSave={onMovieSave}
-                     showPreloader={showPreloader}
                    />
                  }/>
 
@@ -201,6 +176,7 @@ function App() {
                      movies={savedMovies}
                      onMovieDel={onMovieDel}
                      showPreloader={showPreloader}
+                     getMovies={getSavedMovies}
                    />
                  }/>
 

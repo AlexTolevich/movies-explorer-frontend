@@ -5,13 +5,13 @@ import React, {useEffect} from 'react';
  * @param movies - [] массив входящих данных
  * @param isSaved - "" текстовые данные используемые для формирования имени ключа сохраняемых данных в LocalStorage
  * @param initialStateRender - true/false - состояние наполнения массива (movies/[]) при отсутствии данных в input
+ * @param getFilm - функция загрузки фильмов
  * @returns {{setFilteredMovies: (value: (((prevState: *[]) => *[]) | *[])) => void, handleShort: handleShort, setInputSearch: (value: (((prevState: string) => string) | string)) => void, handleChange: handleChange, updateFilteredMovies: updateFilteredMovies, short: boolean, filteredMovies: *[], inputSearch: string, setShort: (value: (((prevState: boolean) => boolean) | boolean)) => void, onSubmitSearch: onSubmitSearch}}
  */
-export function useFindMovie(movies, isSaved, initialStateRender) {
+export function useFindMovie(movies, isSaved, initialStateRender, getFilm) {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [inputSearch, setInputSearch] = React.useState('');
   const [short, setShort] = React.useState(false);
-  const [timer, setTimer] = React.useState(0);
 
   function updateFilteredMovies(filteredMovies) {
     setFilteredMovies(filteredMovies);
@@ -32,42 +32,41 @@ export function useFindMovie(movies, isSaved, initialStateRender) {
     updateFilteredMovies(JSON.parse(localStorage.getItem(`${isSaved}FilteredMovies`) || '[]'));
     updateInputSearch(localStorage.getItem(`${isSaved}InputSearch`) || '');
     updateShort(JSON.parse(localStorage.getItem(`${isSaved}Short`) || 'false'));
+    // clearTimeout(timer);
   }, []);
 
-  function handleChange(event) {
+  function handleInputChange(event) {
     const query = event.target.value.toLowerCase();
     updateInputSearch(query);
-    // if (query.length >= 1) {
-    //   clearTimeout(timer);
-    //   setTimer(setTimeout(() => {
-    //     filterMovies(movies, query, short);
-    //   }, 700));
-    // } else {
-    //   initialStateRender ? updateFilteredMovies(movies) : updateFilteredMovies([]);
-    // }
   }
 
   function filterMovies(movies, input, shortCheck) {
-    updateFilteredMovies(movies
-      .filter(({
-                 nameRU,
-                 nameEN,
-                 duration,
-               }) => (nameRU.toLowerCase().includes(input) || nameEN?.toLowerCase().includes(input))
-        & (!shortCheck || duration <= 40)))
+    if (input.length === 0) {
+      initialStateRender ? updateFilteredMovies(movies) : updateFilteredMovies([]);
+    } else {
+      updateFilteredMovies(movies
+        .filter(({
+                   nameRU,
+                   nameEN,
+                   duration,
+                 }) => (nameRU.toLowerCase().includes(input) || nameEN?.toLowerCase().includes(input))
+          & (!shortCheck || duration <= 40)))
+    }
   }
 
-  function handleShort(event) {
+  function handleSwitchShort(event) {
     const inputShortCheckBox = event.target.checked;
     updateShort(inputShortCheckBox);
-    // if (inputSearch.length >= 1) {
-    //   filterMovies(movies, inputSearch, inputShortCheckBox);
-    // }
+    filterMovies(movies, inputSearch, inputShortCheckBox);
   }
 
   function onSubmitSearch(event) {
     event.preventDefault();
+    if (!initialStateRender) {
+      getFilm();
+    }
     filterMovies(movies, inputSearch, short);
+
   }
 
   return {
@@ -77,9 +76,9 @@ export function useFindMovie(movies, isSaved, initialStateRender) {
     inputSearch,
     setInputSearch,
     setShort,
-    handleShort,
-    handleChange,
+    handleSwitchShort,
+    handleInputChange,
     onSubmitSearch,
-    updateFilteredMovies
+    updateFilteredMovies,
   }
 }

@@ -5,7 +5,8 @@ import Footer             from '../Footer/Footer.js';
 import React, {useEffect} from 'react';
 import {useFindMovie}     from '../../utils/hooks/useFindMovie.js';
 
-function SavedMovies({loggedIn, movies, onMovieDel, showPreloader}) {
+function SavedMovies({loggedIn, movies, onMovieDel, showPreloader, getMovies}) {
+
   const {
     short,
     setShort,
@@ -13,10 +14,14 @@ function SavedMovies({loggedIn, movies, onMovieDel, showPreloader}) {
     updateFilteredMovies,
     inputSearch,
     setInputSearch,
-    handleShort,
-    handleChange,
+    handleSwitchShort,
+    handleInputChange,
     onSubmitSearch
-  } = useFindMovie(movies, 'save', true);
+  } = useFindMovie(movies, 'saved', true);
+
+  useEffect(() => {
+    getMovies();
+  }, [])
 
   useEffect(() => {
     updateFilteredMovies(movies);
@@ -30,8 +35,8 @@ function SavedMovies({loggedIn, movies, onMovieDel, showPreloader}) {
       <SearchForm
         onSubmitSearch={onSubmitSearch}
         short={short}
-        handleChange={handleChange}
-        handleShort={handleShort}
+        handleChange={handleInputChange}
+        handleShort={handleSwitchShort}
         inputSearch={inputSearch}
       />
       <MoviesCardList

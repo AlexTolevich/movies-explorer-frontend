@@ -14,7 +14,7 @@ function SearchForm({onSubmitSearch, short, handleShort, handleChange, inputSear
           name="search-film"
           placeholder="Фильм"
           onChange={handleChange}
-          value={inputSearch}
+          defaultValue={inputSearch}
         />
         <button className="search-form__button" type="submit" name="submit-search"/>
       </div>

@@ -14,8 +14,9 @@ function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel, showPrelo
   return (
     <>
       <Preloader showPreloader={showPreloader}/>
-      <p className={`movies-card-list__text ${((path.pathname === '/movies' && finalArrMovies?.length === 0)
-      || (path.pathname === '/saved-movies' && movies?.length === 0)) && 'movies-card-list__text_visible'}`}
+      <p className={`movies-card-list__text ${((path.pathname === '/movies' && finalArrMovies?.length === 0 && localStorage.getItem('beatFilmMovies'))
+      || (path.pathname === '/saved-movies' && movies?.length === 0)) 
+      && 'movies-card-list__text_visible'}`}
       >Ничего не найдено</p>
       <section className="movies-card-list" aria-label="Фильмы">
         {path.pathname === '/movies' &&
