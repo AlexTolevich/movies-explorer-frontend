@@ -41,8 +41,8 @@ export function useFindMovie(movies, isSaved, initialStateRender, getFilm) {
   }
 
   function filterMovies(movies, input, shortCheck) {
-    if (input.length === 0) {
-      initialStateRender ? updateFilteredMovies(movies) : updateFilteredMovies([]);
+    if (input.length === 0 && !initialStateRender) {
+      !initialStateRender && updateFilteredMovies([]);
     } else {
       updateFilteredMovies(movies
         .filter(({
@@ -64,8 +64,9 @@ export function useFindMovie(movies, isSaved, initialStateRender, getFilm) {
     event.preventDefault();
     if (!initialStateRender) {
       getFilm();
+    } else {
+      filterMovies(movies, inputSearch, short);
     }
-    filterMovies(movies, inputSearch, short);
 
   }
 
@@ -80,5 +81,6 @@ export function useFindMovie(movies, isSaved, initialStateRender, getFilm) {
     handleInputChange,
     onSubmitSearch,
     updateFilteredMovies,
+    filterMovies,
   }
 }

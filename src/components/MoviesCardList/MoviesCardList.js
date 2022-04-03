@@ -4,7 +4,7 @@ import {useLocation}       from 'react-router-dom';
 import {useOutMovDepWidth} from '../../utils/hooks/useOutMovDepWidth.js'
 import Preloader           from '../Preloader/Preloader.js';
 
-function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel, showPreloader}) {
+function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel, showPreloader, isServerSearchError}) {
   const path = useLocation();
   const {
     finalArrMovies,
@@ -14,9 +14,13 @@ function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel, showPrelo
   return (
     <>
       <Preloader showPreloader={showPreloader}/>
-      <p className={`movies-card-list__text ${((path.pathname === '/movies' && finalArrMovies?.length === 0 && localStorage.getItem('beatFilmMovies'))
-      || (path.pathname === '/saved-movies' && movies?.length === 0)) 
-      && 'movies-card-list__text_visible'}`}
+      <p className={`movies-card-list__text ${isServerSearchError && 'movies-card-list__text_visible'}`}
+      >Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и
+        попробуйте ещё раз</p>
+      <p
+        className={`movies-card-list__text ${((path.pathname === '/movies' && finalArrMovies?.length === 0 && localStorage.getItem('beatFilmMovies'))
+          || (path.pathname === '/saved-movies' && movies?.length === 0))
+        && 'movies-card-list__text_visible'}`}
       >Ничего не найдено</p>
       <section className="movies-card-list" aria-label="Фильмы">
         {path.pathname === '/movies' &&

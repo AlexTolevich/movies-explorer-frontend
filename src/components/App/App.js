@@ -17,6 +17,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(null);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [showPreloader, setShowPreloader] = React.useState(false);
+  const [isServerSearchError, setIsServerSearchError] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -62,8 +63,12 @@ function App() {
     mainApi.getMovies()
       .then(data => {
           updateSavedMovies(data);
+          setIsServerSearchError(false);
         }
-      ).catch(err => console.log(err))
+      ).catch(err => {
+      setIsServerSearchError(true);
+      console.log(err)
+    })
       .finally(() => setShowPreloader(false));
   }
 
@@ -177,6 +182,7 @@ function App() {
                      onMovieDel={onMovieDel}
                      showPreloader={showPreloader}
                      getMovies={getSavedMovies}
+                     isServerSearchError={isServerSearchError}
                    />
                  }/>
 

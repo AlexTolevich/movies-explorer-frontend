@@ -8,7 +8,8 @@
 
 .movies-card-list__text {
   display: none;
-  margin: 40px auto;
+  padding: 20px 70px;
+  margin: 0;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.18;

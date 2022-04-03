@@ -5,7 +5,7 @@ import Footer             from '../Footer/Footer.js';
 import React, {useEffect} from 'react';
 import {useFindMovie}     from '../../utils/hooks/useFindMovie.js';
 
-function SavedMovies({loggedIn, movies, onMovieDel, showPreloader, getMovies}) {
+function SavedMovies({loggedIn, movies, onMovieDel, showPreloader, getMovies, isServerSearchError}) {
 
   const {
     short,
@@ -44,6 +44,7 @@ function SavedMovies({loggedIn, movies, onMovieDel, showPreloader, getMovies}) {
         short={short}
         onMovieDel={onMovieDel}
         showPreloader={showPreloader}
+        isServerSearchError={isServerSearchError}
       />
       <Footer/>
     </div>
