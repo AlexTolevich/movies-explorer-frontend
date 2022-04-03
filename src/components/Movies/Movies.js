@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react';
 import Header             from '../Header/Header.js';
-import Footer         from '../Footer/Footer.js';
-import SearchForm     from '../SearchForm/SearchForm.js';
-import MoviesCardList from '../MoviesCardList/MoviesCardList.js';
-import {useFindMovie} from '../../utils/hooks/useFindMovie.js';
+import Footer             from '../Footer/Footer.js';
+import SearchForm         from '../SearchForm/SearchForm.js';
+import MoviesCardList     from '../MoviesCardList/MoviesCardList.js';
+import {useFindMovie}     from '../../utils/hooks/useFindMovie.js';
 
-// import Preloader      from '../Preloader/Preloader.js';
-
-function Movies({loggedIn, movies, savedMovies, onMovieSave}) {
+function Movies({loggedIn, movies, savedMovies, onMovieSave, showPreloader}) {
 
   const {
     short,
@@ -34,8 +32,8 @@ function Movies({loggedIn, movies, savedMovies, onMovieSave}) {
         movies={filteredMovies}
         savedMovies={savedMovies}
         onMovieSave={onMovieSave}
+        showPreloader={showPreloader}
       />
-      {/*<Preloader/>*/}
       <Footer/>
     </>
   )

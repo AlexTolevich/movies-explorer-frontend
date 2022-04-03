@@ -2,8 +2,9 @@ import './MoviesCardList.css'
 import MoviesCard          from '../MoviesCard/MoviesCard.js';
 import {useLocation}       from 'react-router-dom';
 import {useOutMovDepWidth} from '../../utils/hooks/useOutMovDepWidth.js'
+import Preloader           from '../Preloader/Preloader.js';
 
-function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel}) {
+function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel, showPreloader}) {
   const path = useLocation();
   const {
     finalArrMovies,
@@ -12,6 +13,7 @@ function MoviesCardList({movies, savedMovies, onMovieSave, onMovieDel}) {
 
   return (
     <>
+      <Preloader showPreloader={showPreloader}/>
       <section className="movies-card-list" aria-label="Фильмы">
         {finalArrMovies
           .map((movie) =>

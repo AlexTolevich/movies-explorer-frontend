@@ -18,29 +18,33 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(null);
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [showPreloader, setShowPreloader] = React.useState(false);
 
   const navigate = useNavigate();
 
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      // проверяем токен пользователя
-      mainApi
-        .checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id})
-            setLoggedIn(true);
-          }
-        })
-        .catch((err) => {
-          console.log(`Ошибка проверки токена: ${err}`);
-          setLoggedIn(false);
-        });
+      getUserData(jwt)
     } else {
       setLoggedIn(false);
     }
   }, []);
+
+  function getUserData(token) {
+    mainApi
+      .checkToken(token)
+      .then((res) => {
+        if (res) {
+          setCurrentUser({name: res.user.name, email: res.user.email, id: res.user._id})
+          setLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка проверки токена: ${err}`);
+        setLoggedIn(false);
+      });
+  }
 
   /**
    * Функция загрузки данных фильмов посредством методов API с сохранением и извлечением данных в LocalStorage
@@ -52,12 +56,14 @@ function App() {
     if (localStorage.getItem(localStorageKey)) {
       setState((JSON.parse(localStorage.getItem(localStorageKey))));
     } else {
+      setShowPreloader(true);
       apiMethod()
         .then(data => {
             setState(data);
             localStorage.setItem(localStorageKey, JSON.stringify(data));
           }
-        ).catch(err => console.log(err));
+        ).catch(err => console.log(err))
+        .finally(() => setShowPreloader(false));
     }
   }
 
@@ -104,12 +110,14 @@ function App() {
       .catch(err => console.log(err));
   }
 
+
   function onLogin(data) {
     mainApi
       .signin(data)
       .then(res => {
         if (res.token) {
           localStorage.setItem('jwt', res.token);
+          getUserData(res.token);
           setLoggedIn(true);
           navigate('/movies');
         }
@@ -174,6 +182,7 @@ function App() {
                      movies={movies}
                      savedMovies={savedMovies}
                      onMovieSave={onMovieSave}
+                     showPreloader={showPreloader}
                    />
                  }/>
 
@@ -184,6 +193,7 @@ function App() {
                      loggedIn={loggedIn}
                      movies={savedMovies}
                      onMovieDel={onMovieDel}
+                     showPreloader={showPreloader}
                    />
                  }/>
 

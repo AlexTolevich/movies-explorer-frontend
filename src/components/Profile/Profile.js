@@ -36,6 +36,7 @@ function Profile({loggedIn, onUpdateUser, onSignOut}) {
               className="profile__input"
               minLength="2"
               onChange={handleChange}
+              defaultValue={currentUser.name}
               required
             />
           </div>
@@ -52,6 +53,7 @@ function Profile({loggedIn, onUpdateUser, onSignOut}) {
               className="profile__input"
               minLength="6"
               onChange={handleChange}
+              defaultValue={currentUser.email}
               required
             />
           </div>
