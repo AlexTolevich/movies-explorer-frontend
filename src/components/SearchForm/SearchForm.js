@@ -15,7 +15,7 @@ function SearchForm({onSubmitSearch, short, handleShort, handleChange, inputSear
           placeholder="Фильм"
           onChange={handleChange}
           value={inputSearch}
-          required/>
+        />
         <button className="search-form__button" type="submit" name="submit-search"/>
       </div>
       <div className="search-form__filter">

@@ -37,14 +37,14 @@ export function useFindMovie(movies, isSaved, initialStateRender) {
   function handleChange(event) {
     const query = event.target.value.toLowerCase();
     updateInputSearch(query);
-    if (query.length >= 1) {
-      clearTimeout(timer);
-      setTimer(setTimeout(() => {
-        filterMovies(movies, query, short);
-      }, 700));
-    } else {
-      initialStateRender ? updateFilteredMovies(movies) : updateFilteredMovies([]);
-    }
+    // if (query.length >= 1) {
+    //   clearTimeout(timer);
+    //   setTimer(setTimeout(() => {
+    //     filterMovies(movies, query, short);
+    //   }, 700));
+    // } else {
+    //   initialStateRender ? updateFilteredMovies(movies) : updateFilteredMovies([]);
+    // }
   }
 
   function filterMovies(movies, input, shortCheck) {
@@ -60,7 +60,9 @@ export function useFindMovie(movies, isSaved, initialStateRender) {
   function handleShort(event) {
     const inputShortCheckBox = event.target.checked;
     updateShort(inputShortCheckBox);
-    filterMovies(movies, inputSearch, inputShortCheckBox);
+    // if (inputSearch.length >= 1) {
+    //   filterMovies(movies, inputSearch, inputShortCheckBox);
+    // }
   }
 
   function onSubmitSearch(event) {

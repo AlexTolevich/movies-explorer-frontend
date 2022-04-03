@@ -44,7 +44,7 @@ export function useOutMovDepWidth(movies) {
     }
   }
 
-  let finalArrMovies = movies.slice(0, howManyMovies)
+  let finalArrMovies = movies.length > 0 ? movies.slice(0, howManyMovies) : [];
 
   return {
     finalArrMovies,

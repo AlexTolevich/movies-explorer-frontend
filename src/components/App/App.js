@@ -59,10 +59,14 @@ function App() {
       setShowPreloader(true);
       apiMethod()
         .then(data => {
-            setState(data);
-            localStorage.setItem(localStorageKey, JSON.stringify(data));
-          }
-        ).catch(err => console.log(err))
+          setState(data);
+          localStorage.setItem(localStorageKey, JSON.stringify(data));
+        })
+        .catch((err) => {
+          console.log(err)
+          setState([]);
+          localStorage.setItem(localStorageKey, JSON.stringify([]));
+        })
         .finally(() => setShowPreloader(false));
     }
   }
@@ -74,13 +78,16 @@ function App() {
     }
   }, [loggedIn, currentUser]);
 
-  // useEffect(() => {
-  //   getMovies(setSavedMovies, 'savedMovies', mainApi.getMovies);
-  // }, [loggedIn]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-  // }, [savedMovies])
+  useEffect(() => {
+    setShowPreloader(true);
+    mainApi.getMovies()
+      .then(data => {
+          setSavedMovies(data);
+          localStorage.setItem('savedMovies', JSON.stringify(data));
+        }
+      ).catch(err => console.log(err))
+      .finally(() => setShowPreloader(false));
+  }, [SavedMovies]);
 
   function onMovieSave(movie) {
     const isSaved = savedMovies?.some(i => i.movieId === movie.id);
@@ -94,9 +101,9 @@ function App() {
     } else {
       const id = savedMovies.find(item => item.movieId === movie.id)._id;
       mainApi.deleteMovie(id)
-        .then(
-          setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
-        )
+        .then(() => {
+          setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie));
+        })
         .catch(err => console.log(err));
     }
   }
@@ -104,9 +111,9 @@ function App() {
   function onMovieDel(movie) {
     const id = movie._id;
     mainApi.deleteMovie(id)
-      .then(
+      .then(() => {
         setSavedMovies(savedMovies.filter(movie => movie._id === id ? null : movie))
-      )
+      })
       .catch(err => console.log(err));
   }
 

@@ -6,9 +6,6 @@ function MoviesCard({movie, savedMovies, onMovieSave, onMovieDel}) {
   const duration = `${Math.trunc(movie.duration / 60)}ч ${movie.duration % 60}м`;
   const isSaved = savedMovies?.some(i => i.movieId === movie.id)
 
-
-  const movieLikeButtonClassName = (`movies-card__like-btn ${isSaved && 'movies-card__like-btn_is_saved'}`);
-
   function handleSaveClick() {
     onMovieSave(movie);
   }
@@ -46,7 +43,7 @@ function MoviesCard({movie, savedMovies, onMovieSave, onMovieDel}) {
             id={movie.id}
             onChange={handleSaveClick}
           />
-          <span className={movieLikeButtonClassName}/>
+          <span className={`movies-card__like-btn ${isSaved && 'movies-card__like-btn_is_saved'}`}/>
         </label>)
         }
 
