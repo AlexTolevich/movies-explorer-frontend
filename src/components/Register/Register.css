@@ -97,6 +97,11 @@
   opacity: 0.6;
 }
 
+.register__button_disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .register__text {
   margin: 0 auto;
   font-weight: 400;

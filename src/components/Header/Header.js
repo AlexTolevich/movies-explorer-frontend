@@ -15,7 +15,7 @@ function Header({loggedIn}) {
       </Link>
       <Navigation loggedIn={loggedIn}/>
     </header>
-)
+  )
 }
 
 export default Header

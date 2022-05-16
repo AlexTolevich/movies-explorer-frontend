@@ -1,7 +1,8 @@
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import './Navigation.css'
 
 function Navigation({loggedIn}) {
+  const path = useLocation();
   return (
     <nav className="navigation">
       {!loggedIn ?
@@ -13,8 +14,10 @@ function Navigation({loggedIn}) {
         </>) : (
           <>
             <div className="header__desktop-menu">
-              <Link to="/movies" className="header__link header__link_is_logged-in header__link_is_active">Фильмы</Link>
-              <Link to="/saved-movies" className="header__link header__link_is_logged-in">Сохранённые фильмы</Link>
+              <Link to="/movies" className={`header__link header__link_is_logged-in
+              ${path.pathname === '/movies' && 'header__link_is_active'}`}>Фильмы</Link>
+              <Link to="/saved-movies" className={`header__link header__link_is_logged-in
+              ${path.pathname === '/saved-movies' && 'header__link_is_active'}`}>Сохранённые фильмы</Link>
               <Link to="/profile" className="header__account-link">
                 <div className="header__account-logo"/>
                 <p className="header__account-text">Аккаунт</p>
@@ -29,17 +32,20 @@ function Navigation({loggedIn}) {
               <ul className="header__menu-container">
                 <div className="header__link-container">
                   <li className="header__link-item">
-                    <Link to="/" className="header__link header__link_is_logged-in">
+                    <Link to="/" className={`header__link header__link_is_logged-in
+              ${path.pathname === '/' && 'header__link_is_active'}`}>
                       Главная
                     </Link>
                   </li>
                   <li className="header__link-item">
-                    <Link to="/movies" className="header__link header__link_is_logged-in header__link_is_active">
+                    <Link to="/movies" className={`header__link header__link_is_logged-in
+              ${path.pathname === '/movies' && 'header__link_is_active'}`}>
                       Фильмы
                     </Link>
                   </li>
                   <li className="header__link-item">
-                    <Link to="/saved-movies" className="header__link header__link_is_logged-in">
+                    <Link to="/saved-movies" className={`header__link header__link_is_logged-in
+              ${path.pathname === '/saved-movies' && 'header__link_is_active'}`}>
                       Сохранённые фильмы
                     </Link>
                   </li>
