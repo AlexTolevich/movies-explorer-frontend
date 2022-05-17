@@ -21,10 +21,10 @@ function Footer() {
                  className="footer__link">Github</a>
             </li>
             <li className="footer__nav-item">
-              <a href="https://facebook.com/"
+              <a href="https://telegram.org/"
                  target="_blank"
                  rel="noreferrer"
-                 className="footer__link">Facebook</a>
+                 className="footer__link">Telegram</a>
             </li>
           </ul>
         </nav>
