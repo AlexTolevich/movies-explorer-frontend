@@ -1,37 +1,45 @@
 # Дипломная работа Movies Explorer
 
-[Ссылка на макет](https://www.figma.com/file/Zv4nxAkATjYoON7xWIR5Yr/Diploma-(Copy)?node-id=932%3A4450)
+## Описание проекта
 
-[Адрес для деплоя проекта](https://movies.kuznetsov.nomoredomains.work)
+Проект - портфолио на React.js, с использованием принципов Single Page Application (роутинг на стороне front-end и
+динамическое обновление данных страницы без перезагрузки) с добавлением функционала регистрации и авторизации
+пользователей. Реализован поиск фильмов по ключевым словам полученных
+с [API](https://api.nomoreparties.co/beatfilm-movies)
 
-## Available Scripts
+Реализовано:
 
-In the project directory, you can run:
+- поиск фильмов по ключевым словам + фильтр короткометражек
+- добавление фильмов в сохраненные
+- удаление карточек из сохраненных
+- редактирование данных профиля пользователя
+- регистрация пользователей
+- защищенные роуты не допускающие отображение контента не авторизованным пользователям
+- хранение данных поиска в локальном хранилище localStorage
+- всплывающие окна (Popup) для информирования пользователей об успешном действии/ошибке
+- проверка состояния авторизации пользователя, путем сохранения с последующей проверкой наличия JWT токена в локальном
+  хранилище localStorage
 
-### `npm start`
+## Инструкции
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Для начала работы вам необходимо:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- установить [NodeJS](https://nodejs.org/en/) - позволяет работать с менеджером пакетов NPM и выполнять JS код вне
+  браузеров
+- установить [GIT](https://git-scm.com/) - система контроля версий
 
-### `npm run build`
+### Установка
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- клонировать проект с удаленного репозитория, для чего выполнить
+  команду `git clone git@github.com:AlexTolevich/movies-explorer-frontend.git`
+- установить модули прописанные в зависимостях package.json, для чего выполнить команду `npm install`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Работа с проектом
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- команда `npm build` — собирает проект, выполняется для сборки проекта в "production"
+- команда `npm start` — запускает локальный сервер доступный по адресу http://localhost:3000/, файлы проекта
+  компилируются в режиме разработки.
 
-### `npm run eject`
+## [Ссылка на макет](https://www.figma.com/file/Zv4nxAkATjYoON7xWIR5Yr/Diploma-(Copy)?node-id=932%3A4450)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## [Адрес для деплоя проекта](https://movies.kuznetsov.nomoredomains.work)
